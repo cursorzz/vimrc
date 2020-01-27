@@ -1,0 +1,23 @@
+{
+  "html.format.enable": true,
+  "solargraph.formatting": true,
+  "solargraph.checkGemVersion": false,
+  "coc.preferences.formatOnSaveFiletypes": ["ruby", "javascript", "typescript", "javascriptreact"],
+  "typescript.suggest.enabled": true,
+  "javascript.format.enabled": true,
+  "javascript.format.semicolons": "insert",
+  "eslint.enable": false,
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
+  "typescript.suggest.completeFunctionCalls": false,
+  "tsserver.enable": true,
+  "tsserver.enableJavascript": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "suggest.numberSelect": false,
+  "suggest.noselect": false,
+  "suggest.enablePreview": true,
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "list.source.files.excludePatterns": ["**/deps/**/*", "**/node_modules/**/*", "**/tmp/**/*"]
+}
