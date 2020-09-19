@@ -38,6 +38,22 @@ set guifont=Inconsolata_Nerd_Font:h12
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'tpope/vim-eunuch'
+
+Plug 'wakatime/vim-wakatime'
+
+Plug 'yggdroot/indentline'
+
+Plug 'posva/vim-vue'
+Plug 'chriskempson/base16-vim'
+
+Plug 'liuchengxu/vim-clap'
+
+Plug 'HerringtonDarkholme/yats.vim'
+
+" better search result
+Plug 'dyng/ctrlsf.vim'
+
 
 " Plug 'wincent/terminus'
 " Plug 'justinmk/vim-dirvish'

@@ -1,0 +1,825 @@
+" 设置 {{{
+" 显式设置当前脚本的编码方式以支持多字节字符
+scriptencoding utf-8
+let g:python_host_prog  = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+" filetype on
+" filetype plugin on
+
+" 始终使用系统剪切板
+set clipboard+=unnamedplus
+
+set foldlevel=10
+set relativenumber
+
+" 开启 NVIM 专用选项
+if has('nvim')
+  " 允许真彩显示
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+  " 允许光标变化
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+endif
+
+" 设置查找文件时使用的路径
+set path=.,$HOME/.local/include,/usr/local/include,/usr/include,,
+
+" 让 ./ 在 'tags' 选项里表示相对于当前路径而不是相对于当前文件
+set cpoptions+=d
+" set cpoptions+=n
+
+" 插入模式自动补全标签显示更多信息
+set showfulltag
+
+" 禁止过长的行回绕（超过屏幕宽度）
+" set nowrap
+
+" 让水平滚动更加自然
+set sidescroll=1
+set sidescrolloff=3
+
+" 设置空白字符的视觉提示（eol:¬,nbsp:˽,）
+set list listchars=extends:❯,precedes:❮,tab:▸\ ,trail:˽
+
+" 消除碍眼的文字
+set shortmess+=I
+
+" 设置行宽的视觉提示
+set colorcolumn=80
+
+" 自定义拼写检查
+set nospell spelllang=en_us
+set spellsuggest=best,5
+
+" 在右边打开新的窗口（垂直分割）
+set splitright
+
+" 模式切换（在状态栏左下方）
+set noshowmode
+
+" 按键提示（在状态栏右下方）
+set showcmd
+
+" 显示行号／列号等附加信息（在状态栏右方）
+set ruler
+
+" 设置行的最大宽度（如果允许断行的话）
+set textwidth=80
+
+" 设置格式化选项
+set formatoptions=cjmqrtB
+
+" 设置自动补全选项
+set omnifunc=syntaxcomplete#Complete
+set complete=.,w,b,u,U,d,t
+set completeopt=longest,menuone,preview
+set completefunc=syntaxcomplete#Complete
+
+" 自动补全候选窗口最大高度
+set pumheight=10
+
+" 自动更正自动补全选项的大小写
+set infercase
+
+" 设置命令行补全选项
+set wildmenu
+set wildmode=list:longest,full
+
+" 设置插入成对符号时闪烁指示
+set showmatch
+set matchtime=1
+
+" 设置缩进相关选项
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab shiftround smartindent
+
+" set tabstop=4 shiftwidth=4 softtabstop=4 expandtab shiftround smartindent
+
+" 允许保存 undo 状态
+" set undofile
+
+" 允许在未保存时切换 buffers
+set hidden
+" }}}
+
+" 状态栏 {{{
+" 自定义状态栏配置
+" if has('statusline')
+"   set laststatus=2
+
+"   set statusline=%<                                       " 状态栏开始
+"   set statusline+=%.40f                                   " 相对路径的当前文件
+"   set statusline+=%y                                      " 文件类型
+"   set statusline+=[%{&ff}]                                " 文件格式
+"   set statusline+=[%{strlen(&fenc)?&fenc:'none'}]         " 文件编码
+"   set statusline+=%m                                      " 更改状态
+"   set statusline+=%h                                      " 帮助标识
+"   set statusline+=%r                                      " 只读标识
+"   if exists(':Pencil')
+"     set statusline+=%<\ %{PencilMode()}                   " 插件
+"   endif
+
+"   set statusline+=%*                                      " 恢复高亮
+"   set statusline+=%=                                      " 状态栏右边
+"   set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+"   set statusline+=%4l\ %02c\                              " 行号／列号
+"   set statusline+=%3p%%\ in\ %-4L                         " 内容长度
+" endif
+" }}}
+
+" 映射 {{{
+" 映射 leader 和 localleader
+nnoremap <SPACE> <nop>
+let mapleader = "\\"
+let maplocalleader = "\\"
+
+" 完善有缺陷的默认映射
+nnoremap Y y$
+nnoremap 0 g0
+vnoremap 0 g0
+nnoremap ^ g^
+vnoremap ^ g^
+nnoremap $ g$
+vnoremap $ g$
+nnoremap j gj
+vnoremap j gj
+nnoremap k gk
+vnoremap k gk
+nnoremap * *N
+vnoremap * y:let @/=@"<CR>
+nnoremap # #N
+vnoremap # #N
+
+" 映射一些个人偏好（可选）
+inoremap <C-f> <C-o>a
+inoremap <C-b> <Esc>i
+
+" 映射 Enter -> :nohlsearch（仅常规模式）
+nnoremap <silent> <CR> :nohlsearch<CR>
+
+" 映射 Options(Alt) + h/j/k/l 在窗口之间跳转
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
+" 映射 Control(Ctrl) + j/k x3 倍速上下移动
+" nnoremap <A-j> 3j
+" nnoremap <A-k> 3k
+" vnoremap <A-j> 3j
+" vnoremap <A-k> 3k
+
+" 映射 Option(Alt) + h/l 在标签页之间跳转
+nnoremap <A-[> gT
+nnoremap <A-]> gt
+tnoremap <C-\><C-n><A-h> gT
+tnoremap <C-\><C-n><A-l> gt
+
+" 映射更高效的菜单选择
+inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" 开启内置 Terminal 模式
+nnoremap <silent> <Leader>: :below 10sp term://$SHELL<CR>A
+
+" NERDTree 映射
+" nnoremap <silent><Leader><F1> :NERDTreeFind<CR>
+" nnoremap <silent><F1>         :NERDTreeToggle<CR>
+
+" EasyAlign 映射
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+" }}}
+
+" 缩写 {{{
+" 缩写 :so -> :source % 用于重新加载当前文件
+cnoreabbrev <expr> so getcmdtype() == ':' && getcmdline() == 'so' ? 'source %' : 'so'
+" 缩写 :sw -> :w !sudo tee % 用于获取 Admin 权限写入文件
+cnoreabbrev <expr> sw getcmdtype() == ':' && getcmdline() == 'sw' ? 'w !sudo tee %' : 'sw'
+" 缩写 :ev -> :tabedit PATH/TO/init.vim 用于新开标签页编辑 init.vim 文件
+cnoreabbrev <expr> ev getcmdtype() == ':' && getcmdline() == 'ev' ? 'tabedit $MYVIMRC' : 'ev'
+" 缩写 :ue -> :UltiSnipsEdit 用于编辑 UltiSnips
+cnoreabbrev <expr> ue getcmdtype() == ':' && getcmdline() == 'ue' ? 'UltiSnipsEdit' : 'ue'
+" }}}
+
+" 插件 {{{
+if empty(glob('$HOME/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd! VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('$HOME/.config/nvim/plugins')
+
+Plug 'justinmk/vim-dirvish'
+
+" Plug 'sheerun/vim-polyglot'
+Plug 'zhou13/vim-easyescape'
+let g:easyescape_chars = { "h": 2 }
+let g:easyescape_timeout = 100
+inoremap hh <ESC>
+cnoremap hh <ESC>
+tnoremap hh <ESC>
+
+" easy navigate with s + 2chars
+Plug 'justinmk/vim-sneak'
+let g:sneak#label = 1
+
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
+Plug 'ayu-theme/ayu-vim' " or other package manager
+" set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" FuzzyFinder should ignore all files in .gitignore
+" let ignorefile = ".gitignore"
+" if filereadable(ignorefile)
+"   let ignore = '\v\~$'
+"   for line in readfile(ignorefile)
+"     if match(line, '^\s*$') == -1 && match(line, '^#') == -1
+"       let line = substitute(line, '^/', '', '')
+"       let line = substitute(line, '\.', '\\.', 'g')
+"       let line = substitute(line, '\*', '.*', 'g')
+"       let ignore .= '|^' . line
+"     endif
+"   endfor
+"   let g:fuf_coveragefile_exclude = ignore
+"   let g:fuf_file_exclude = ignore
+"   let g:fuf_dir_exclude = ignore
+" endif
+" let g:fuf_dir_exclude = "\v\~$|"
+" Plug 'junegunn/fzf.vim'
+
+
+" nnoremap <silent> <C-f> :GFiles --exclude-standard --others --cached<CR>
+" nnoremap <silent> <C-g> :Buffers<CR>
+"...
+if (has("termguicolors"))
+  set termguicolors
+endif
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+"let ayucolor="dark"   " for dark version of theme
+"colorscheme ayu
+
+" NOTE: 尽量不要依赖这种以视觉查找为主的插件，效率杀手！
+"       我一般在向别人讲解项目结构或者可视化的演示使用
+Plug 'scrooloose/nerdtree'                           " 树形文件查看插件
+" let NERDTreeIgnore              = ['.sass-cache$', 'tmp$']
+" let NERDTreeSortOrder           = ['\/$', '*']
+" let NERDTreeWinPos              = 'left'
+" let NERDTreeWinSize             = 40
+" let NERDTreeChDirMode           = 1
+" let NERDTreeDirArrows           = 1
+" let NERDTreeMinimalUI           = 1
+" let NERDTreeMouseMode           = 2
+" let NERDTreeShowHidden          = 0
+" let NERDTreeQuitOnOpen          = 0
+" let NERDTreeHijackNetrw         = 1
+" let NERDTreeSortHiddenFirst     = 1
+" let NERDTreeAutoDeleteBuffer    = 1
+" let NERDTreeCaseSensitiveSort   = 1
+" let NERDTreeHighlightCursorline = 1
+
+" Plug 'rking/ag.vim'                                  " the_silver_searcher
+
+Plug 'mileszs/ack.vim'
+
+"the search engine is ag now
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+" let g:ag_working_path_mode="r"
+"
+set autochdir
+
+Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化插件
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+nnoremap <silent> <C-b> :<C-u>CocList files<CR>
+nnoremap <silent> <C-f> :<C-u>CocList files -F<CR>
+nnoremap <silent> <C-g> :<C-u>CocList buffers<CR>
+nnoremap <silent> <C-p> :<C-u>Clap grep<CR>
+
+set updatetime=300
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfunction
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus','gitbranch', 'currentfunction', 'message', 'readonly', 'modified', 'filepath' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'gitbranch': 'fugitive#head',
+      \   'filepath': 'LightlineFilename',
+      \   'abspath': '%F',
+      \   'relativepath': '%f',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'message': 'StatusDiagnostic'
+      \ },
+      \ }
+" let g:lightline = {
+"       \   'colorscheme': 'powerline',
+"       \   'active': {
+"       \     'left': [ ['mode', 'paste'],
+"       \               ['readonly', 'filename', 'modified', 'fugitive'] ]
+"       \   },
+"       \   'component': {
+"       \     'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+"       \   },
+"       \   'component_visible_condition': {
+"       \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+"       \   }
+"       \ }
+
+Plug 'tpope/vim-repeat'                              " 扩展重复命令的应用范围
+Plug 'tpope/vim-surround'                            " 增强各种成对字符的操作
+Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
+Plug 'tpope/vim-unimpaired'                          " 补充成对操作的键位映射
+
+Plug 'kana/vim-textobj-user'                         " 允许用户定义文本对象
+Plug 'reedes/vim-pencil'                             " 文本写作辅助工具
+Plug 'reedes/vim-textobj-quote'                      " 支持排版格式引号字符
+Plug 'reedes/vim-textobj-sentence'                   " 支持更自然的句子对象
+Plug 'junegunn/goyo.vim'                             " 提供免干扰的写作环境
+Plug 'junegunn/limelight.vim'                        " 配合 Goyo 提供行聚焦
+
+" TODO: READ DEOPLETE FOR RECOMMENDED EXTERNAL PLUGINS
+" deoplete init for vim-plug
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+" 异步自动代码补全
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+set hidden
+
+set nobackup
+set nowritebackup
+set cmdheight=2
+
+set signcolumn=yes
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+"     \ 'python': ['/usr/local/bin/pyls'],
+"     \ 'ruby': ['~/.rbenv/shims/solargraph']
+"     \ }
+
+
+
+" Plug 'Shougo/deoplete.nvim', {'do': function('DoRemote')}
+" let g:deoplete#enable_at_startup = 1                 " 缺省开启自动补全
+
+let g:loaded_ruby_provider = 1
+" Let <Tab> also do completion
+" inoremap <silent><expr> <Tab>
+" \ pumvisible() ? "\<C-n>" :
+" \ deoplete#mappings#manual_complete()
+
+" let g:deoplete#omni#input_patterns.ruby =
+"       \ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
+" 出现候选项目的时候使用tab
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+
+" <CR> 直接换行而不执行 deoplete 的默认行为
+" inoremap <silent> <CR> <C-r>=<SID>return_without_deoplete()<CR>
+" function! s:return_without_deoplete() abort
+"   return deoplete#mappings#close_popup() . "\<CR>"
+" endfunction
+Plug 'Shougo/context_filetype.vim'                   " 提供插件切换文档类型能力
+Plug 'Konfekt/FastFold'                              " 削减代码折叠对性能的影响
+
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'  " 智能代码片断工具
+let g:UltiSnipsSnippetsDir         = $HOME.'/.config/nvim/UltiSnips'
+let g:UltiSnipsExpandTrigger       = '<TAB>'
+let g:UltiSnipsListSnippets        = '<A-TAB>'
+let g:UltiSnipsJumpForwardTrigger  = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+let g:UltiSnipsMappingsToIgnore    = ["deoplete"]
+
+Plug 'editorconfig/editorconfig-vim'                 " Editor Config 配置插件
+let g:EditorConfig_exec_path        = '/usr/local/bin/editorconfig'
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+" Git 整合
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+
+Plug 'junegunn/vim-peekaboo'                         " 预览注册器的内容
+
+Plug 'junegunn/vim-easy-align'                       " 强悍又简约的智能对齐
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+Plug 'benekastah/neomake'
+let g:neomake_error_sign   = {'text': '😡 '}
+let g:neomake_warning_sign = {'text': '😠 '}
+
+" Markdown
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+let g:vim_markdown_toc_autofit      = 1
+let g:vim_markdown_frontmatter      = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_folding_disabled = 1
+
+" XML
+" Plug 'othree/xml.vim', {'for': ['html', 'html.handlebars']}
+
+" HTML
+" Plug 'othree/html5.vim', {'for': ['html', 'html.handlebars']}
+
+" Handlebars
+" Plug 'mustache/vim-mustache-handlebars', {'for': ['html.handlebars']}
+" let g:mustache_abbreviations = 1                     " 内置缩写展开
+
+" CSS
+Plug 'JulesWang/css.vim', {'for': ['css', 'less', 'scss']}
+Plug 'hail2u/vim-css3-syntax', {'for': ['css', 'less', 'scss']}
+Plug 'othree/csscomplete.vim', {'for': ['css', 'less', 'scss']}
+Plug 'genoma/vim-less', {'for': ['css', 'less']}
+Plug 'cakebaker/scss-syntax.vim', {'for': ['css', 'scss']}
+Plug 'stephenway/postcss.vim', {'for': 'css'}
+
+" JavaScript
+Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
+let g:javascript_enable_domhtmlcss    = 1
+let g:javascript_ignore_javaScriptdoc = 1
+" let g:javascript_conceal_function     = "𝛌"
+" let g:javascript_conceal_null         = "𝛈"
+" let g:javascript_conceal_this         = "𝛎"
+" let g:javascript_conceal_return       = "𝛇"
+" let g:javascript_conceal_undefined  = "𝛘"
+" let g:javascript_conceal_NaN          = "𝛆"
+" let g:javascript_conceal_prototype    = "𝛕"
+" let g:javascript_conceal_static       = "𝛓"
+" let g:javascript_conceal_super        = "𝛍"
+" let g:javascript_conceal_arrow_function = "⇒"
+Plug 'jason0x43/vim-js-indent', {'for': ['javascript', 'javascript.jsx', 'typescript']}
+Plug 'othree/jsdoc-syntax.vim', {'for': ['javascript', 'javascript.jsx']}
+Plug '1995eaton/vim-better-javascript-completion', {'for': ['javascript', 'javascript.jsx']}
+let g:vimjs#chromeapis    = 1
+let g:vimjs#smartcomplete = 1
+
+Plug 'mattn/emmet-vim'
+
+" JSX
+Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+
+" JSON
+Plug 'elzr/vim-json', {'for': 'json'}
+
+" Rails
+Plug 'tpope/vim-rails', {'for': ['ruby', 'erb']}
+
+" TypeScript
+Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+
+" TOML
+Plug 'cespare/vim-toml', {'for': 'toml'}
+
+" Elixir
+" Plug 'slashmili/alchemist.vim', {'for': ['elixir', 'eelixir']}
+Plug 'elixir-editors/vim-elixir'
+" Plug 'mhinz/vim-mix-format'
+" let g:mix_format_on_save = 1
+Plug 'powerman/vim-plugin-AnsiEsc'                   " 处理 ansi escape sequences
+
+" Coffee
+Plug 'kchmck/vim-coffee-script', {'for': ['coffee']}
+
+
+" Docker
+Plug 'ekalinin/Dockerfile.vim', {'for': 'docker'}
+
+" SQL
+Plug 'shmup/vim-sql-syntax', {'for': 'sql'}
+
+" color
+
+Plug 'flazz/vim-colorschemes'
+Plug 'gcmt/wildfire.vim'
+" Plug 'ap/vim-css-color'
+" Plug 'ervandew/supertab'
+"
+Plug 'c-brenn/phoenix.vim'
+Plug 'tpope/vim-projectionist'
+Plug 'christoomey/vim-tmux-navigator'
+
+" use gr{motion}, grr, {Visul}gr
+" Plug 'ReplaceWithRegister'
+" Plug 'rhysd/clever-f.vim'
+
+" Plug 'nathanaelkane/vim-indent-guides'
+" let g:indent_guides_enable_on_vim_startup = 1
+
+
+
+" Plug 'w0rp/ale'
+Plug 'liuchengxu/vim-clap'
+
+
+Plug 'posva/vim-vue'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Run both javascript and vue linters for vue files.
+" let g:ale_linter_aliases = ['javascript', 'vue']
+" Select the eslint and vls linters.
+" let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+" let g:ale_linters = {'vue': ['eslint', 'vls'], 'typescript' : ['tsserver', 'tslint']}
+
+"let g:ale_fixers = {
+"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"\   'javascript': ['eslint'],
+"\   'typescript': ['prettier', 'tslint'],
+"\   'vue': ['eslint'],
+"\   'ruby': ['rubocop']
+"\}
+"let g:ale_fix_on_save = 1
+
+Plug 'airblade/vim-gitgutter'
+" Plug 'yuttie/comfortable-motion.vim'
+" let g:comfortable_motion_scroll_down_key = "j"
+" let g:comfortable_motion_scroll_up_key = "k"
+
+" Plug 'tpope/vim-endwise'
+
+" let g:ale_sign_column_always = 1
+
+" Plug 'Syntastic
+" Plug 'vim-syntastic/syntastic'
+
+" let g:syntastic_ruby_checkers = ['rubocop']
+
+" let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
+
+" let g:syntastic_enable_elixir_checker = 1
+" let g:syntastic_elixir_checkers = ["elixir"]
+
+" let g:indent_guides_enable_on_vim_startup = 1
+
+
+
+" let g:indent_guides_auto_colors = 0
+" hi IndentGuidesOdd  guibg=red   ctermbg=3
+" hi IndentGuidesEven guibg=green ctermbg=4
+
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
+
+" record using time for vim
+Plug 'wakatime/vim-wakatime'
+Plug 'colepeters/spacemacs-theme.vim'
+
+
+
+call plug#end()
+" }}}
+
+" 主题 {{{
+" set background=dark
+" colorscheme gruvbox
+" colorscheme Tomorrow-Night
+" colorscheme spacemacs-theme
+
+" TODO: 设置内置终端的颜色
+" let g:terminal_color_0  = '#282a36'
+" let g:terminal_color_1  = '#ff5555'
+" let g:terminal_color_2  = '#50fa7b'
+" let g:terminal_color_3  = '#f1fa8c'
+" let g:terminal_color_4  = '#bd93f9'
+" let g:terminal_color_5  = '#ff79c6'
+" let g:terminal_color_6  = '#8be9fd'
+" let g:terminal_color_7  = '#50fa7b'
+" let g:terminal_color_8  = '#555753'
+" let g:terminal_color_9  = '#ef2929'
+" let g:terminal_color_10 = '#8ae234'
+" let g:terminal_color_11 = '#fce94f'
+" let g:terminal_color_12 = '#729fcf'
+" let g:terminal_color_13 = '#ad7fa8'
+" let g:terminal_color_14 = '#00f5e9'
+" let g:terminal_color_15 = '#eeeeec'
+" }}}
+
+" 自动命令 {{{
+augroup NVIM_SETTINGS
+  autocmd!
+  autocmd FileType conf,vim setlocal foldmethod=marker
+  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+augroup END
+
+augroup MARKUP_LANGUAGE
+  autocmd!
+  autocmd User GoyoEnter Limelight
+  autocmd User GoyoLeave Limelight!
+  autocmd FileType markdown setlocal conceallevel=2 formatoptions+=aM
+        \                 | call pencil#init({'wrap': 'soft', 'textwidth': 72})
+        \                 | call textobj#quote#init()
+        \                 | call textobj#sentence#init()
+        \                 | setlocal nolinebreak
+  autocmd FileType html,html.handlebars setlocal textwidth=0
+augroup END
+
+augroup STYLESHEET
+  autocmd!
+  " autocmd BufNewFile,BufRead *.css setlocal filetype=scss
+  autocmd FileType css,less,scss setlocal colorcolumn=80 iskeyword+=-
+augroup END
+
+augroup JAVASCRIPT
+  autocmd!
+  " autocmd BufWritePost *.js,*.jsx update | Neomake eslint
+  autocmd FileType javascript,javascript.jsx setlocal colorcolumn=80 conceallevel=2 iskeyword+=$
+  " autocmd FileType html,html.handlebars,javascript,javascript.jsx,json,yaml colorscheme material-theme
+augroup END
+
+" augroup ELIXIR
+"   autocmd!
+"   autocmd FileType elixir setlocal colorcolumn=80 " foldmethod=syntax foldlevel=1 foldnestmax=2
+" augroup END
+
+augroup OMNIFUNCS
+  autocmd!
+  autocmd FileType css             setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType scss            setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html            setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType html.handlebars setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript      setlocal omnifunc=js#CompleteJS
+  autocmd FileType javascript.jsx  setlocal omnifunc=js#CompleteJS
+  autocmd FileType ruby            setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType xml             setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
+
+augroup CUSTOM_HIGHLIGHT
+  autocmd!
+  autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO:\s\|NOTE:\s\|FIXME:\s\|ISSUE:\s\|REVIEW:\s', -1)
+augroup END
+
+augroup MISC
+  autocmd!
+  " 总是在新标签页打开帮助文档，见：HelpInNewTab()
+  autocmd FileType help call HelpInNewTab()
+
+  " 插入模式下切换只当前文件路径以便自动路径补全
+  autocmd InsertEnter * let saved_cwd = getcwd() | set autochdir
+  autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(saved_cwd)
+
+  " 保存时自动创建不存在的目录
+  autocmd BufWritePre,FileWritePre * call <SID>mkdir_on_save()
+augroup END
+" }}}
+
+" 辅助函数 {{{
+" 使用新的 Tab 打开帮助文档
+function! HelpInNewTab()
+  if &buftype == 'help' | execute "silent normal \<C-w>T" | endif
+endfunction
+
+" 保存时创建不存在的目录
+function! <SID>mkdir_on_save()
+  let s:directory = expand('<afile>:p:h')
+  if !isdirectory(s:directory)
+    call mkdir(s:directory, 'p')
+  endif
+endfunction
+" }}}
+"
+
+vnoremap <C-x>c "+y
+nnoremap <C-x>c "+p
+nnoremap <Leader>/ :vsplit
+nnoremap <Leader>n :lnext<CR>
+nnoremap <Leader>p :lprevious<CR>
+nnoremap <Leader>w :w<CR>
+
+nnoremap <C-h> <C-w><Left>
+nnoremap <C-l> <C-w><Right>
+nnoremap <C-k> <C-w><Up>
+nnoremap <C-j> <C-w><Down>
+nnoremap <Leader>i :tabfirst<CR>
+nnoremap <Leader>c :tabonly<CR>
+
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+nnoremap <leader>ff :let @*=expand("%")<CR>
+
+noremap <Leader>e :NERDTreeFind<CR>
+if has('nvim')
+   nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+endif
+
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+" let ale_emit_conflict_warnings = 0
+
+" inoremap (; (<CR>);<C-c>O
+" inoremap (, (<CR>),<C-c>O
+" inoremap {; {<CR>};<C-c>O
+" inoremap {, {<CR>},<C-c>O
+" inoremap [; [<CR>];<C-c>O
+" inoremap [, [<CR>],<C-c>O
+
+" Plug 'tpope/vim-endwise'
+"
+Plug 'tpope/vim-eunuch'
+
+set synmaxcol=512
+" Plug 'arzg/vim-corvine'
+
+" quick navigate horizontal
+" Plug 'unblevable/quick-scope'
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+" highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+" Plug 'vim-scripts/ReplaceWithRegister'
+
+
+" dont do lowercase in visual u
+:vmap u <Nop>
+
+Plug 'vim-scripts/ReplaceWithRegister'
+
+Plug 'ryanoasis/vim-devicons'
+set guifont=Inconsolata_Nerd_Font:h12
+
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme gruvbox
+

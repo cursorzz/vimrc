@@ -1,5 +1,7 @@
 set bg=dark                 " 暗色主题
 colorscheme gruvbox         " 颜色主题
+" set termguicolors
+" colorscheme base16-default-dark
 
 " use hgtgt
 inoremap hh <ESC>
