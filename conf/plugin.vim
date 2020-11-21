@@ -26,6 +26,13 @@ augroup end
 " NERDTree config
 noremap <Leader>t :NERDTreeToggle<CR>
 noremap <Leader>e :NERDTreeFind<CR>
+noremap <Leader>w :call ToggleNertTree()<CR>
+
+function! ToggleNerdTree() abort
+  let isOpen = get(g:, 'NERDTree.IsOpen', 0)
+  echo isOpen
+endfunction
+
 
 " ctrfconfig
 "

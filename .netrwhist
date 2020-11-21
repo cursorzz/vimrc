@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/zengzhi/Projects/gignation/tools'
+let g:netrw_dirhist_2='/Users/zengzhi/Projects/sunway/layouts'
+let g:netrw_dirhist_1='/Users/zengzhi/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/elasticsearch-rails-0.1.9/lib/rails/templates'
+let g:netrw_dirhist_0='/Users/zengzhi/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/elasticsearch-rails-0.1.9/lib/rails'
+let g:netrw_dirhist_9='/Users/zengzhi/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/elasticsearch-rails-0.1.9/lib'
+let g:netrw_dirhist_8='/Users/zengzhi/.rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/elasticsearch-rails-0.1.9'
+let g:netrw_dirhist_7='/Users/zengzhi/Projects/linakesi/nde-backends/napps/audio'
+let g:netrw_dirhist_6='/Users/zengzhi/.config/nvim/lua/nvim_lsp'
+let g:netrw_dirhist_5='/Users/zengzhi/Projects/ourheros/sources/all_sources/ocloud-hjjc-master/ocloud-hjjc-boot/docs/markdown/generated'
+let g:netrw_dirhist_4='/Users/zengzhi/Projects/ourheros/sources/all_sources/ocloud-hjjc-master/ocloud-hjjc-boot/docs/markdown'

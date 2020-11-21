@@ -72,7 +72,7 @@ if has('nvim')
 endif
 
 set t_Co=256
-set autochdir
+" set autochdir
 
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
