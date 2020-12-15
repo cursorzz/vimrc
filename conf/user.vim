@@ -26,8 +26,11 @@ noremap <leader>0 :tablast<cr>
 " close other tabs
 nnoremap <Leader>c :tabonly<CR>
 
-nnoremap <C-f> <cmd>lua require'telescope.builtin'.git_files{}<CR>
+nnoremap <C-f> <cmd>lua require'user'.git_files()<CR>
+nnoremap <C-g> <cmd>lua require'telescope.builtin'.buffers{previewer=false}<CR>
 nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
+tnoremap <Esc> <C-\><C-n>
+
 
 
 " NERDTree config

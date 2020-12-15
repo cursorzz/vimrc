@@ -10,7 +10,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Plug 'liuchengxu/vim-clap'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " " file browers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 树形文件查看插件
@@ -22,7 +22,7 @@ Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化�
 Plug 'vim-scripts/ReplaceWithRegister'
 
 " " easy navigate with s + 2chars
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 
 " " better commentary
 Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
@@ -58,13 +58,13 @@ Plug 'tpope/vim-fugitive'
 " Plug 'dyng/ctrlsf.vim'
 
 " new syntaxer
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-lua/telescope.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
 " Plug 'nvim-lua/diagnostic-nvim'
 
 " Plug 'hkupty/nvimux'
@@ -73,7 +73,7 @@ Plug 'tpope/vim-fugitive'
 " Plug 'justinmk/vim-dirvish'
 call plug#end()
 
-" luafile ~/.config/nvim/init.lua
+luafile ~/.config/nvim/init.lua
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -90,8 +90,7 @@ set shortmess+=c
 
 let s:configs = [
    \'basic.vim',
-   \'user.vim',
-   \'plugin.vim'
+   \'user.vim'
    \]
 
 for s:path in s:configs

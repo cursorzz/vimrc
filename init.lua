@@ -1,4 +1,4 @@
-local lsp = require'nvim_lsp'
+local lsp = require'lspconfig'
 
 local function mapper(mode, key, result)
   vim.fn.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
@@ -15,8 +15,7 @@ local on_attach = function(client)
   -- require'lsp_status'.on_attach(client)
   -- require'diagnostic'.on_attach()
   attach_mapping()
-  require'completion'.on_attach(client)
-  require'diagnostic'.on_attach(client)
+  require'completion'.on_attach()
   -- require'completion'.on_attach({
   --     sorter = 'alphabet',
   --     matcher = {'exact', 'fuzzy'}
@@ -29,7 +28,7 @@ lsp.vimls.setup{
 }
 
 
-lsp.solargraph.setup{on_attach=on_attach}
+lsp.solargraph.setup{on_attach=require('completion').on_attach}
 
 lsp.tsserver.setup{
   on_attach=require'completion'.on_attach
