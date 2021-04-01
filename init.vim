@@ -28,6 +28,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
 " personal vim wiki
 Plug 'vimwiki/vimwiki'
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
 
 
 " Plug 'zhou13/vim-easyescape'
@@ -40,10 +41,11 @@ Plug 'ryanoasis/vim-devicons'
 set guifont=Inconsolata_Nerd_Font:h12
 
 Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
 
 " Plug 'tpope/vim-eunuch'
 
-" Plug 'wakatime/vim-wakatime'
+Plug 'wakatime/vim-wakatime'
 
 " Plug 'yggdroot/indentline'
 
@@ -55,25 +57,38 @@ Plug 'tpope/vim-fugitive'
 " Plug 'HerringtonDarkholme/yats.vim'
 
 " " better search result
-" Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 
 " new syntaxer
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'code-biscuits/nvim-biscuits'
+" Plug 'nvim-lua/completion-nvim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
-" Plug 'nvim-lua/diagnostic-nvim'
+Plug 'hrsh7th/nvim-compe'
 
-" Plug 'hkupty/nvimux'
+Plug 'kyazdani42/nvim-tree.lua'
+
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+" Plug 'cocopon/iceberg.vim'
+
+" Plug 'dyng/ctrlsf.vim'
+" https://github.com/lewis6991/gitsigns.nvim
+Plug 'lewis6991/gitsigns.nvim'
+
+" Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'norcalli/nvim-colorizer.lua'
+
+
+Plug 'hkupty/nvimux'
 
 " Plug 'wincent/terminus'
-" Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-dirvish'
 call plug#end()
 
-luafile ~/.config/nvim/init.lua
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -97,27 +112,4 @@ for s:path in s:configs
   exe 'source ' .'~/.config/nvim/conf/'.s:path
 endfor
 
-" lua << EOF
-" local nvimux = require('nvimux')
-
-" -- Nvimux configuration
-" nvimux.config.set_all{
-"   prefix = '<C-s>',
-"   new_window = 'term', -- Use 'term' if you want to open a new term for every new window
-"   new_tab = 'term', -- Defaults to new_window. Set to 'term' if you want a new term for every new tab
-"   new_window_buffer = 'single',
-"   quickterm_direction = 'botright',
-"   quickterm_orientation = 'vertical',
-"   quickterm_scope = 't', -- Use 'g' for global quickterm
-"   quickterm_size = '80',
-" }
-
-" -- Nvimux custom bindings
-" nvimux.bindings.bind_all{
-"   {'-', ':NvimuxHorizontalSplit', {'n', 'v', 'i', 't'}},
-"   {'\\', ':NvimuxVerticalSplit', {'n', 'v', 'i', 't'}},
-" }
-
-" -- Required so nvimux sets the mappings correctly
-" nvimux.bootstrap()
-" EOF
+luafile ~/.config/nvim/base.lua

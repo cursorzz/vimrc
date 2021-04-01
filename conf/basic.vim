@@ -21,7 +21,7 @@ set encoding=utf-8          " 文件编码
 set noerrorbells            " 无警告音
 set novisualbell            " 无选中提示音
 set t_vb=
-set relativenumber
+" set relativenumber
 
 """""""行"""""""
 set nu                      " 显示行号

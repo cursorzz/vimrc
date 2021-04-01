@@ -92,3 +92,6 @@ let g:easyescape_timeout = 100
 
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
