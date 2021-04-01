@@ -112,4 +112,4 @@ for s:path in s:configs
   exe 'source ' .'~/.config/nvim/conf/'.s:path
 endfor
 
-luafile ~/.config/nvim/base.lua
+luafile ~/.config/nvim/lua/init.lua
