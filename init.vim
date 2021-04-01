@@ -62,7 +62,7 @@ Plug 'dyng/ctrlsf.vim'
 " new syntaxer
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
-Plug 'code-biscuits/nvim-biscuits'
+" Plug 'code-biscuits/nvim-biscuits'
 " Plug 'nvim-lua/completion-nvim'
 
 Plug 'nvim-lua/popup.nvim'
@@ -70,16 +70,16 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'hrsh7th/nvim-compe'
 
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " Plug 'cocopon/iceberg.vim'
 
 " Plug 'dyng/ctrlsf.vim'
 " https://github.com/lewis6991/gitsigns.nvim
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/gitsigns.nvim', {'branch' : 'main'}
 
-" Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'norcalli/nvim-colorizer.lua'
 
 
