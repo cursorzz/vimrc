@@ -1,4 +1,3 @@
-local lsp = require'lspconfig'
 
 -- vim.lsp.set_log_level("debug")
 
@@ -12,14 +11,6 @@ local attach_mapping = function ()
 end
 
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-  -- Disable signs
-  virtual_text = false,
-  -- signs = false,
-  }
-)
-
 local on_attach = function(client)
   print(client)
   -- require'lsp_status'.on_attach(client)
@@ -32,17 +23,6 @@ local on_attach = function(client)
 end
 
 
-lsp.vimls.setup{
-  on_attach=on_attach
-}
-
-
-lsp.solargraph.setup{}
-
-lsp.tsserver.setup{
-}
-
-lsp.gopls.setup{ }
 
 -- lsp.sumneko_lua.setup{
 --   on_attach=on_attach,
@@ -50,7 +30,7 @@ lsp.gopls.setup{ }
 -- }
 
 require'nvim-treesitter.configs'.setup {
-  -- ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  -- ensure_installed = "",     -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { "c", "rust" },  -- list of language that will be disabled
@@ -90,5 +70,6 @@ require('gitsigns').setup()
 require('colorizer').setup()
 
 require('zac.nvimux')
+require('zac.lsp')
 
 -- require('nvim-biscuits').setup({})

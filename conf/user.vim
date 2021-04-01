@@ -2,8 +2,8 @@ set bg=dark                 " 暗色主题
 " colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
-colorscheme lunar
-" colorscheme iceberg
+" colorscheme lunar
+colorscheme iceberg
 set termguicolors
 " colorscheme base16-default-dark
 
