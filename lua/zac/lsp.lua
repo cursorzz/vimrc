@@ -11,7 +11,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 lsp.vimls.setup{}
 lsp.solargraph.setup{}
 lsp.tsserver.setup{}
--- json npm install -g vscode-json-languageserver
+-- npm install -g vscode-json-languageserver
 lsp.jsonls.setup{}
 lsp.vuels.setup{}
 lsp.gopls.setup{}
+-- npm install -g vscode-css-languageserver-bin
+lsp.cssls.setup{}
