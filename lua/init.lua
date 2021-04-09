@@ -22,3 +22,10 @@ require('lualine').setup({
 -- lua auto pair plugin
 -- require "pears".setup()
 
+require('zac.nvimux')
+require('zac.lsp')
+
+require('lualine').setup{
+options = {section_separators = '', component_separators = ''}
+}
+

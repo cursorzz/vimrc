@@ -18,6 +18,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 树形文件查看插�
 
 " " status line
 " Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化插件
+Plug 'hoob3rt/lualine.nvim'
 
 " " betner replace content, visual mode \"gr\" will replace copied content
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -88,6 +89,10 @@ Plug 'nvim-lua/telescope.nvim'
 Plug 'hrsh7th/nvim-compe'
 
 Plug 'kyazdani42/nvim-tree.lua'
+" https://github.com/windwp/nvim-spectre
+Plug 'windwp/nvim-spectre'
+
+" Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'cocopon/iceberg.vim'

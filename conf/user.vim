@@ -1,7 +1,9 @@
 set bg=dark                 " 暗色主题
-" colorscheme gruvbox         " 颜色主题
+colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
+" colorscheme lunar
+" colorscheme iceberg
 set termguicolors
 let g:tokyonight_style = "night"
 " let g:tokyonight_dark_sidebar = true
@@ -97,6 +99,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 
 highlight TelescopeMatching       guifg=#E79921
+autocmd BufWritePre *.vue lua vim.lsp.buf.formatting()
 
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
