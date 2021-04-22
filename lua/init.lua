@@ -59,7 +59,7 @@ require'compe'.setup {
     spell = false;
     calc = false;
     nvim_lsp = true;
-    nvim_lua = false;
+    nvim_lua = true;
     vsnip = false;
   };
 

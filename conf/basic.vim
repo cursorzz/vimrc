@@ -8,6 +8,7 @@ set autoread                " 设置当文件被改动时自动载入
 set autowrite               " 自动保存
 " set confirm                 " 在处理未保存或只读文件的时候，弹出确认
 set nobackup                " 从不备份  
+set hidden
 set noswapfile              " 禁止生成临时文件
 set history=1000            " 历史记录数
 set undofile                " vim退出并在下次打开后仍然保留上次的undo历史

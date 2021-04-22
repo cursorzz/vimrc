@@ -30,7 +30,15 @@ Plug 'tpope/vim-commentary'                          " 提供简单的快捷注�
 Plug 'vimwiki/vimwiki'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+
+" Plug 'karb94/neoscroll.nvim'
+Plug 'ojroques/vim-oscyank'
+
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
 
 

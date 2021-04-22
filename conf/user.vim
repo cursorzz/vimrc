@@ -2,8 +2,8 @@ set bg=dark                 " 暗色主题
 " colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
-" colorscheme lunar
-colorscheme iceberg
+colorscheme gruvbox
+" colorscheme iceberg
 set termguicolors
 " colorscheme base16-default-dark
 
@@ -35,6 +35,8 @@ nnoremap <C-f> <cmd>lua require'zac.telescope'.find_files()<CR>
 nnoremap <C-g> <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>f <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
+nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
+vnoremap <leader>c :OSCYank<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>p <cmd>lua require'telescope.builtin'.live_grep()<CR>
 tnoremap <Esc> <C-\><C-n>
@@ -89,3 +91,9 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 highlight TelescopeMatching       guifg=#E79921
 
+
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.vue PrettierAsync()
+
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
+let g:prettier#autoformat_require_pragma = 0
