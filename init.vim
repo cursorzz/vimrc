@@ -4,7 +4,8 @@ call plug#begin('$HOME/.config/nvim/plugins')
 Plug 'gcmt/wildfire.vim'
 
 " color scheme
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
+Plug 'lifepillar/vim-gruvbox8'
 
 " better vim navigation within tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -20,6 +21,10 @@ Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化�
 
 " " betner replace content, visual mode \"gr\" will replace copied content
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " " easy navigate with s + 2chars
 " Plug 'justinmk/vim-sneak'
@@ -81,10 +86,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'hrsh7th/nvim-compe'
 
-" Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'cocopon/iceberg.vim'
+
+Plug 'ray-x/lsp_signature.nvim'
 
 " Plug 'dyng/ctrlsf.vim'
 " https://github.com/lewis6991/gitsigns.nvim

@@ -2,9 +2,12 @@ set bg=dark                 " 暗色主题
 " colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
-colorscheme gruvbox
-" colorscheme iceberg
 set termguicolors
+let g:tokyonight_style = "night"
+" let g:tokyonight_dark_sidebar = true
+" colorscheme gruvbox
+colorscheme tokyonight
+" colorscheme iceberg
 " colorscheme base16-default-dark
 
 " use hgtgt
@@ -36,9 +39,11 @@ nnoremap <C-g> <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>f <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
 nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
-vnoremap <leader>c :OSCYank<CR>
+" vnoremap <leader>c :OSCYank<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>p <cmd>lua require'telescope.builtin'.live_grep()<CR>
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 tnoremap <Esc> <C-\><C-n>
 
 
@@ -94,6 +99,18 @@ highlight TelescopeMatching       guifg=#E79921
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.vue PrettierAsync()
+autocmd BufWritePre *.js PrettierAsync()
 
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
 let g:prettier#autoformat_require_pragma = 0
+
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
+
