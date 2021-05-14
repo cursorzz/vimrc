@@ -29,6 +29,9 @@ tnoremap hh <ESC>
 
 :vmap u <Nop>
 
+" universal yank 
+vnoremap <leader>c :OSCYank<CR>
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
 
 
 " close other tabs
@@ -39,7 +42,6 @@ nnoremap <C-g> <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>f <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
 nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
-" vnoremap <leader>c :OSCYank<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>p <cmd>lua require'telescope.builtin'.live_grep()<CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>

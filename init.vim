@@ -17,7 +17,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 树形文件查看插件
 
 " " status line
-Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化插件
+" Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化插件
 
 " " betner replace content, visual mode \"gr\" will replace copied content
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -38,7 +38,7 @@ Plug 'christianchiarulli/nvcode-color-schemes.vim'
 " Plug 'jiangmiao/auto-pairs'
 
 " Plug 'karb94/neoscroll.nvim'
-Plug 'ojroques/vim-oscyank'
+Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
 
 
 Plug 'prettier/vim-prettier', {
@@ -70,8 +70,6 @@ Plug 'wakatime/vim-wakatime'
 
 " Plug 'liuchengxu/vim-clap'
 
-" Plug 'HerringtonDarkholme/yats.vim'
-
 " " better search result
 Plug 'dyng/ctrlsf.vim'
 
@@ -92,6 +90,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'cocopon/iceberg.vim'
 
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'hoob3rt/lualine.nvim'
 
 " Plug 'dyng/ctrlsf.vim'
 " https://github.com/lewis6991/gitsigns.nvim
