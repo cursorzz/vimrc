@@ -63,6 +63,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'wakatime/vim-wakatime'
 
+Plug 'TimUntersberger/neogit'
+
 " Plug 'yggdroot/indentline'
 
 " Plug 'posva/vim-vue'
@@ -74,6 +76,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'dyng/ctrlsf.vim'
 
 " new syntaxer
+Plug 'tjdevries/nlua.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 " Plug 'code-biscuits/nvim-biscuits'
@@ -91,6 +94,8 @@ Plug 'cocopon/iceberg.vim'
 
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'hoob3rt/lualine.nvim'
+
+Plug 'steelsojka/pears.nvim'
 
 " Plug 'dyng/ctrlsf.vim'
 " https://github.com/lewis6991/gitsigns.nvim
