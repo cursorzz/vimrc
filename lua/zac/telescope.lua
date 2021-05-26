@@ -53,8 +53,18 @@ M.find_files = function()
   )
 end
 
+M.git_files = function()
+  require'telescope.builtin'.git_files(
+    require('telescope.themes').get_dropdown({
+      previewer=false,
+    })
+  )
+end
+
 M.buffers = function()
-require'telescope.builtin'.buffers(require('telescope.themes').get_dropdown({previewer=false, show_all_buffers=true}))
+  require'telescope.builtin'.buffers(
+    require('telescope.themes').get_dropdown({previewer=false, show_all_buffers=true})
+  )
 end
 
 return M

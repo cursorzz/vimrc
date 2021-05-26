@@ -2,11 +2,6 @@ set bg=dark                 " 暗色主题
 " colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
-set termguicolors
-let g:tokyonight_style = "night"
-" let g:tokyonight_dark_sidebar = true
-" colorscheme gruvbox
-colorscheme tokyonight
 " colorscheme iceberg
 " colorscheme base16-default-dark
 
@@ -37,9 +32,9 @@ autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSC
 " close other tabs
 nnoremap <Leader>c :tabonly<CR>
 
-nnoremap <C-f> <cmd>lua require'zac.telescope'.find_files()<CR>
-nnoremap <C-g> <cmd>lua require'zac.telescope'.buffers()<CR>
-nnoremap <Leader>f <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
+nnoremap <C-f> <cmd>lua require'zac.telescope'.git_files()<CR>
+nnoremap <C-g> <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
+nnoremap <C-b> <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
 nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
@@ -116,3 +111,9 @@ endif
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
+
+set termguicolors
+let g:tokyonight_style = "night"
+" let g:tokyonight_dark_sidebar = true
+" colorscheme gruvbox
+colorscheme tokyonight
