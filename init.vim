@@ -16,6 +16,9 @@ Plug 'christoomey/vim-tmux-navigator'
 " " file browers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 树形文件查看插件
 
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 " " status line
 " Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化插件
 Plug 'hoob3rt/lualine.nvim'
@@ -33,7 +36,7 @@ Plug 'hrsh7th/vim-vsnip-integ'
 " " better commentary
 Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
 " personal vim wiki
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 
 " Plug 'jiangmiao/auto-pairs'
@@ -45,6 +48,10 @@ Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
 
 

@@ -25,7 +25,9 @@ require('lualine').setup({
 require('zac.nvimux')
 require('zac.lsp')
 
-require('lualine').setup{
-options = {section_separators = '', component_separators = ''}
-}
+require'lsp_signature'.on_attach()
+
+-- require('lualine').setup{
+-- options = {section_separators = '', component_separators = ''}
+-- }
 
