@@ -32,3 +32,12 @@ require'nvim-treesitter.configs'.setup {
 -- lua auto pair plugin
 -- require "pears".setup()
 
+require('zac.nvimux')
+require('zac.lsp')
+
+require'lsp_signature'.on_attach()
+
+-- require('lualine').setup{
+-- options = {section_separators = '', component_separators = ''}
+-- }
+

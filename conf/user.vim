@@ -1,8 +1,13 @@
 set bg=dark                 " 暗色主题
-
-" colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
+" colorscheme lunar
+" colorscheme iceberg
+set termguicolors
+let g:tokyonight_style = "night"
+" let g:tokyonight_dark_sidebar = true
+" colorscheme gruvbox
+colorscheme tokyonight
 " colorscheme iceberg
 " colorscheme base16-default-dark
 
@@ -84,16 +89,17 @@ nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
 
-
-
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
-highlight TelescopeMatching       guifg=#E79921
 
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
@@ -113,9 +119,4 @@ endif
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
-
-set termguicolors
-let g:tokyonight_style = "night"
-" let g:tokyonight_dark_sidebar = true
-" colorscheme gruvbox
-colorscheme tokyonight
+highlight TelescopeMatching       guifg=#E79921
