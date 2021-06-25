@@ -1,4 +1,5 @@
 set bg=dark                 " 暗色主题
+
 " colorscheme gruvbox         " 颜色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
@@ -38,9 +39,10 @@ nnoremap <C-b> <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
 nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
-nnoremap <Leader>p <cmd>lua require'telescope.builtin'.live_grep()<CR>
-nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <Leader>p <cmd>lua require'zac.telescope'.grep_find()<CR>
+nnoremap f <cmd>lua require'hop'.hint_words()<CR>
+" nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+" nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 tnoremap <Esc> <C-\><C-n>
 
 
@@ -95,7 +97,7 @@ highlight TelescopeMatching       guifg=#E79921
 
 
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.vue PrettierAsync()
+autocmd BufWritePre *.vue Prettier()
 autocmd BufWritePre *.js PrettierAsync()
 
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
