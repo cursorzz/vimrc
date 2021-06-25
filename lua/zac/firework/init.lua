@@ -23,7 +23,7 @@ function M.expand()
   shortest = nil
   for _, v in ipair(M.expand) do
     result = M.get_candidate_dict(v)
-    if shortest == nil or shortest.length > result.length
+    if shortest == nil or shortest.length > result.length do
       shortest = result
     end
   end

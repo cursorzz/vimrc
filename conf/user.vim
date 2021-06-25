@@ -102,8 +102,8 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 
 
 
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.vue Prettier()
+autocmd BufWritePre *.go,*.rb lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.vue PrettierAsync()
 autocmd BufWritePre *.js PrettierAsync()
 
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
