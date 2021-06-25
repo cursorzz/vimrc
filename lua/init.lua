@@ -5,8 +5,9 @@ require('zac.compe')
 
 require('gitsigns').setup()
 require('colorizer').setup()
-require'lsp_signature'.on_attach()
-require('lualine').setup({
+-- require'lsp_signature'.on_attach()
+
+require('lualine').setup {
  options = {section_separators = '', component_separators = '', theme = 'wombat'};
  sections = {
    lualine_c = {
@@ -17,7 +18,16 @@ require('lualine').setup({
     }
   }
  }
-})
+}
+
+require'nvim-treesitter.configs'.setup {
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ['<cr>'] = 'textsubjects-smart',
+    }
+  },
+}
 
 -- lua auto pair plugin
 -- require "pears".setup()

@@ -1,7 +1,7 @@
 " inspired by https://github.com/Gyufei/MyVimrc
 call plug#begin('$HOME/.config/nvim/plugins')
 " quick select inner content
-Plug 'gcmt/wildfire.vim'
+" Plug 'gcmt/wildfire.vim'
 
 " color scheme
 " Plug 'gruvbox-community/gruvbox'
@@ -15,6 +15,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " " file browers
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 树形文件查看插件
+
+Plug 'windwp/nvim-spectre'
 
 " " status line
 " Plug 'itchyny/lightline.vim'                         " 轻量级状态栏优化插件
@@ -34,6 +36,9 @@ Plug 'tpope/vim-commentary'                          " 提供简单的快捷注�
 " personal vim wiki
 Plug 'vimwiki/vimwiki'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
+
+" " easy navigation tool
+Plug 'phaazon/hop.nvim'
 
 " Plug 'jiangmiao/auto-pairs'
 
@@ -103,6 +108,9 @@ Plug 'lewis6991/gitsigns.nvim', {'branch' : 'main'}
 
 " Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'norcalli/nvim-colorizer.lua'
+
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'RRethy/nvim-treesitter-textsubjects'
 
 
 Plug 'hkupty/nvimux'

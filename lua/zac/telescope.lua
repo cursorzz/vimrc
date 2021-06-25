@@ -1,4 +1,5 @@
 local actions = require('telescope.actions')
+local action_state = require("telescope.actions.state")
 local M = {}
 
 require'telescope'.setup{
@@ -51,6 +52,28 @@ M.find_files = function()
       previewer=false,
     })
   )
+end
+
+M.grep_find = function()
+  result = vim.fn.expand("<cword>")
+
+  if result == '' then
+    result = vim.fn.input("Grep For >")
+  end
+  require('telescope.builtin').grep_string {
+    search = result,
+    _on_input_filter_cb = function(prompt)
+      print(prompt)
+      return {}
+    end,
+    attach_mappings = function(buf, map)
+      map('i', '<c-l>', function()
+        local picker = action_state.get_current_picker(buf)
+        -- print(vim.inspect(picker.manager))
+      end)
+      return true
+    end
+  }
 end
 
 M.git_files = function()

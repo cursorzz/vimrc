@@ -29,6 +29,10 @@ lsp.tsserver.setup{}
 -- npm install -g vscode-json-languageserver
 lsp.jsonls.setup{}
 lsp.vuels.setup{
+  on_attach = function()
+    require("lsp_signature").on_attach()
+  end
+}
   -- default_config = {
   --   cmd = { 'vls' };
   --   filetypes = {"vue"};
@@ -88,8 +92,52 @@ lsp.vuels.setup{
   --     }
   --   }
   -- }
+-- }
+lsp.gopls.setup{
+  on_attach = function()
+    require("lsp_signature").on_attach()
+  end
 }
-lsp.gopls.setup{}
 -- npm install -g vscode-css-languageserver-bin
 lsp.cssls.setup{
 }
+
+
+
+-- auto put errors to quick fix list
+--
+
+local severity_map = { "E", "W", "I", "H" }
+
+local parse_diagnostics = function(diagnostics)
+  if not diagnostics then return end
+  local items = {}
+  for _, diagnostic in ipairs(diagnostics) do
+    local fname = vim.fn.bufname()
+    local position = diagnostic.range.start
+    local severity = diagnostic.severity
+    table.insert(items, {
+      filename = fname,
+      type = severity_map[severity],
+      lnum = position.line + 1,
+      col = position.character + 1,
+      text = diagnostic.message:gsub("\r", ""):gsub("\n", " ")
+    })
+  end
+  return items
+end
+
+-- redefine unwanted callbacks to be an empty function
+-- notice that I keep `vim.lsp.util.buf_diagnostics_underline()`
+-- vim.lsp.util.buf_diagnostics_signs = function() return end
+-- vim.lsp.util.buf_diagnostics_virtual_text = function() return end
+
+update_diagnostics_loclist = function()
+  if vim.lsp.diagnostic.get_count(0, [[Error]]) > 0 then
+    vim.lsp.diagnostic.set_loclist({open_loclist=false})
+  else
+    -- vim.cmd [[lclose]]
+  end
+end
+
+vim.api.nvim_command [[autocmd! User LspDiagnosticsChanged lua update_diagnostics_loclist()]]
