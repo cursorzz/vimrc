@@ -38,6 +38,8 @@ autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSC
 " close other tabs
 nnoremap <Leader>c :tabonly<CR>
 
+nnoremap <leader>S :lua require('spectre').open()<CR>
+
 nnoremap <C-f> <cmd>lua require'zac.telescope'.git_files()<CR>
 nnoremap <C-g> <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
 nnoremap <C-b> <cmd>lua require'zac.telescope'.buffers()<CR>
@@ -52,22 +54,22 @@ tnoremap <Esc> <C-\><C-n>
 
 
 " NERDTree config
-noremap <Leader>t :NERDTreeToggle<CR>
-noremap <Leader>e :NERDTreeFind<CR>
+noremap <Leader>t :NvimTreeToggle<CR>
+noremap <Leader>e :NvimTreeFindFile<CR>
 
 " nnoremap <Leader>vi :e $MYVIMRC<CR> 
 nnoremap <Leader>r :source $MYVIMRC<CR> 
 
-function! ToggleNerdTree() abort
-  let isOpen = get(g:, 'NERDTree.IsOpen', 0)
-  echom isOpen
-  if isOpen == 0
-    :NERDTreeToggle
-    :NERDTreeFind
-  else
-    :NERDTreeToggle
-  endif
-endfunction
+" function! ToggleNerdTree() abort
+"   let isOpen = get(g:, 'NERDTree.IsOpen', 0)
+"   echom isOpen
+"   if isOpen == 0
+"     :NERDTreeToggle
+"     :NERDTreeFind
+"   else
+"     :NERDTreeToggle
+"   endif
+" endfunction
 
 
 let g:easyescape_chars = { "h": 2 }
