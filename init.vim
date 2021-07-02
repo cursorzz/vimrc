@@ -55,8 +55,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'wakatime/vim-wakatime'
 
-Plug 'TimUntersberger/neogit'
 
+" Plug 'yggdroot/indentline'
 
 " Plug 'posva/vim-vue'
 " Plug 'chriskempson/base16-vim'
@@ -83,6 +83,9 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 " https://github.com/windwp/nvim-spectre
 Plug 'windwp/nvim-spectre'
+
+Plug 'TimUntersberger/neogit'
+Plug 'sindrets/diffview.nvim', {'branch': 'main'}
 
 " Plug 'kyazdani42/nvim-tree.lua'
 

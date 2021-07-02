@@ -35,6 +35,9 @@ vnoremap <leader>c :OSCYank<CR>
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
 
 
+nnoremap <Leader>d :DiffviewOpen<CR>
+
+
 " close other tabs
 nnoremap <Leader>c :tabonly<CR>
 
