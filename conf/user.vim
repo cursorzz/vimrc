@@ -4,12 +4,12 @@ set bg=dark                 " 暗色主题
 " colorscheme lunar
 " colorscheme iceberg
 set termguicolors
-let g:tokyonight_style = "night"
+" let g:tokyonight_style = "night"
 " let g:tokyonight_dark_sidebar = true
 " colorscheme gruvbox
-colorscheme tokyonight
+" colorscheme tokyonight
 " colorscheme iceberg
-" colorscheme base16-default-dark
+colorscheme base16-schemer-dark
 
 " use hgtgt
 inoremap hh <ESC>

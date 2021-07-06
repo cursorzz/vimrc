@@ -24,7 +24,8 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
 " " better commentary
-Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
+" Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
+Plug 'tomtom/tcomment_vim'
 " personal vim wiki
 " Plug 'vimwiki/vimwiki'
 " Plug 'christianchiarulli/nvcode-color-schemes.vim'
@@ -96,7 +97,7 @@ Plug 'steelsojka/pears.nvim'
 " https://github.com/lewis6991/gitsigns.nvim
 Plug 'lewis6991/gitsigns.nvim', {'branch' : 'main'}
 
-Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+" Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'norcalli/nvim-colorizer.lua'
 
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -107,6 +108,7 @@ Plug 'RRethy/nvim-treesitter-textsubjects'
 
 " Plug 'wincent/terminus'
 Plug 'justinmk/vim-dirvish'
+Plug 'RRethy/nvim-base16'
 call plug#end()
 
 
