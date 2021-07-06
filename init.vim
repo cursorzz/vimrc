@@ -36,9 +36,9 @@ Plug 'phaazon/hop.nvim'
 
 Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
 
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+" Plug 'prettier/vim-prettier', {
+  " \ 'do': 'yarn install',
+  " \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
 " Plug 'zhou13/vim-easyescape'
 " Plug 'elixir-lang/vim-elixir', {'for': ['elixir', 'eelixir']}
@@ -103,12 +103,14 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 
+Plug 'mhartington/formatter.nvim'
+
 
 " Plug 'hkupty/nvimux'
 
 " Plug 'wincent/terminus'
 Plug 'justinmk/vim-dirvish'
-Plug 'RRethy/nvim-base16'
+" Plug 'RRethy/nvim-base16'
 call plug#end()
 
 

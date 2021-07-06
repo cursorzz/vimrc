@@ -4,12 +4,12 @@ set bg=dark                 " 暗色主题
 " colorscheme lunar
 " colorscheme iceberg
 set termguicolors
-" let g:tokyonight_style = "night"
-" let g:tokyonight_dark_sidebar = true
+let g:tokyonight_style = "night"
+let g:tokyonight_dark_sidebar = "true"
 " colorscheme gruvbox
-" colorscheme tokyonight
+colorscheme tokyonight
 " colorscheme iceberg
-colorscheme base16-schemer-dark
+" colorscheme base16-schemer-dark
 
 " use hgtgt
 inoremap hh <ESC>
@@ -105,8 +105,8 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 
 
 autocmd BufWritePre *.go,*.rb lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.vue PrettierAsync()
-autocmd BufWritePre *.js PrettierAsync()
+" autocmd BufWritePre *.vue PrettierAsync()
+" autocmd BufWritePre *.js PrettierAsync()
 
 autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
 let g:prettier#autoformat_require_pragma = 0
