@@ -8,7 +8,8 @@ call plug#begin('$HOME/.config/nvim/plugins')
 Plug 'lifepillar/vim-gruvbox8'
 
 " better vim navigation within tmux
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
+Plug 'aserowy/tmux.nvim', { 'branch': 'main'}
 " " file browers
 
 Plug 'hrsh7th/vim-vsnip'
