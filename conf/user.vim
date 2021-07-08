@@ -125,3 +125,5 @@ autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
 highlight TelescopeMatching       guifg=#E79921
+
+" au BufWritePost ~/.config/nvim/*.{vim,lua} so $MYVIMRC

@@ -1,122 +1,68 @@
 " inspired by https://github.com/Gyufei/MyVimrc
 call plug#begin('$HOME/.config/nvim/plugins')
-" quick select inner content
-" Plug 'gcmt/wildfire.vim'
-
-" color scheme
-" Plug 'gruvbox-community/gruvbox'
-Plug 'lifepillar/vim-gruvbox8'
-
-" better vim navigation within tmux
-" Plug 'christoomey/vim-tmux-navigator'
-Plug 'aserowy/tmux.nvim', { 'branch': 'main'}
-" " file browers
-
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-
-Plug 'hoob3rt/lualine.nvim'
-
-" betner replace content, visual mode \"gr\" will replace copied content
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-
-" " better commentary
-" Plug 'tpope/vim-commentary'                          " 提供简单的快捷注释功能
-Plug 'tomtom/tcomment_vim'
-" personal vim wiki
-" Plug 'vimwiki/vimwiki'
-" Plug 'christianchiarulli/nvcode-color-schemes.vim'
-
-" " easy navigation tool
-" hop is an sneak alternative for easy navigation
-Plug 'phaazon/hop.nvim'  
-
-Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
-
-" Plug 'prettier/vim-prettier', {
-  " \ 'do': 'yarn install',
-  " \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
-
-" Plug 'zhou13/vim-easyescape'
-" Plug 'elixir-lang/vim-elixir', {'for': ['elixir', 'eelixir']}
-
-
-" Plug 'ryanoasis/vim-devicons'
-Plug 'kyazdani42/nvim-web-devicons'
-set guifont=Inconsolata_Nerd_Font:h12
-
-Plug 'tpope/vim-fugitive'
-" Plug 'airblade/vim-gitgutter'
-
-" Plug 'tpope/vim-eunuch'
-
-Plug 'wakatime/vim-wakatime'
-
-
-" Plug 'yggdroot/indentline'
-
-" Plug 'posva/vim-vue'
-" Plug 'chriskempson/base16-vim'
-
-" Plug 'liuchengxu/vim-clap'
-
-" " better search result
-" Plug 'dyng/ctrlsf.vim'
-
-" new syntaxer
-Plug 'tjdevries/nlua.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'neovim/nvim-lspconfig'
-" Plug 'code-biscuits/nvim-biscuits'
-" Plug 'nvim-lua/completion-nvim'
-
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'hrsh7th/nvim-compe'
+" quick select inner content
+" color scheme
+Plug 'aserowy/tmux.nvim', { 'branch': 'main'}
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
-Plug 'kyazdani42/nvim-tree.lua'
-
-" https://github.com/windwp/nvim-spectre
-Plug 'windwp/nvim-spectre'
-
-Plug 'TimUntersberger/neogit'
-Plug 'sindrets/diffview.nvim', {'branch': 'main'}
-
-" Plug 'kyazdani42/nvim-tree.lua'
-
-Plug 'cocopon/iceberg.vim'
-
-Plug 'ray-x/lsp_signature.nvim'
+" [Appearance]
 Plug 'hoob3rt/lualine.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'norcalli/nvim-colorizer.lua'
 
-Plug 'steelsojka/pears.nvim'
-
-" Plug 'dyng/ctrlsf.vim'
+" [Utils]
+" betner replace content, visual mode \"gr\" will replace copied content
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
 " https://github.com/lewis6991/gitsigns.nvim
 Plug 'lewis6991/gitsigns.nvim', {'branch' : 'main'}
 
-" Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
-Plug 'norcalli/nvim-colorizer.lua'
+" [Tab completion]
+Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
+Plug 'tomtom/tcomment_vim'
+" " easy navigation tool
+" hop is an sneak alternative for easy navigation
+Plug 'phaazon/hop.nvim'  
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'tpope/vim-fugitive'
+Plug 'wakatime/vim-wakatime'
+Plug 'tjdevries/nlua.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
+" https://github.com/windwp/nvim-spectre
+Plug 'windwp/nvim-spectre'
+Plug 'TimUntersberger/neogit'
+Plug 'sindrets/diffview.nvim', {'branch': 'main'}
+Plug 'ray-x/lsp_signature.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 
 Plug 'mhartington/formatter.nvim'
 
-
-" Plug 'hkupty/nvimux'
-
-" Plug 'wincent/terminus'
-Plug 'justinmk/vim-dirvish'
-" Plug 'RRethy/nvim-base16'
 call plug#end()
 
+" Plug 'gcmt/wildfire.vim'
+" Plug 'lifepillar/vim-gruvbox8'
+" Plug 'justinmk/vim-dirvish'
+" Plug 'RRethy/nvim-base16'
+" Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+" Plug 'dyng/ctrlsf.vim'
+"
+" a colorscheme
+" Plug 'cocopon/iceberg.vim'  
+"
+" auto pair plugin. not useful currently
+" Plug 'steelsojka/pears.nvim'
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 " inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -126,6 +72,7 @@ call plug#end()
 " nnoremap <silent> <C-g> <cmd>lua require'telescope.builtin'.buffers{}<CR>
 
 " Set completeopt to have a better completion experience
+set guifont=Inconsolata_Nerd_Font:h12
 set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
