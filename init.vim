@@ -48,6 +48,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 
 Plug 'mhartington/formatter.nvim'
+Plug 'ray-x/aurora'
 
 call plug#end()
 
@@ -88,3 +89,12 @@ for s:path in s:configs
 endfor
 
 luafile ~/.config/nvim/lua/init.lua
+
+function! DoReload(m) abort
+  lua require('plenary.reload').reload_module('zac.firework', true)
+  lua require('zac.firework').expand(vim.fn.eval("a:m"))
+endfunction
+
+nnoremap <CR> :call DoReload("n")<CR>
+xnoremap <CR> :<C-U>call DoReload("v")<CR>
+

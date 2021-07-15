@@ -1,60 +1,176 @@
 local M = {
-  expands = {'i(', 'i]'};
+  expands = {"i(", "i]", 'i"', "i'", "i)"}
+  -- expands = {"i]"}
 }
 
-local exec = vim.api.nvim_exec
-local puts = function(whatever)
-  print(vim.inspect(whatever))
+local function t(str)
+  -- Adjust boolean arguments as needed
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local exec = function(cmd)
+  vim.api.nvim_exec(t(cmd), true)
+end
+local puts = function(...)
+  print(vim.inspect(...))
+end
+
+M.__index = M
+-- nagative means a < b.  0 means a == b
+function compare_pos(a, b)
+  if a[1] < b[1] then
+    return -1
+  elseif a[1] == b[1] then
+    return a[2] - b[2]
+  else
+    return 1
+  end
+end
+
+local function in_visual_mode(m)
+  local mode = vim.fn.mode()
+  return mode == "v"
+end
+
+Range = {
+  start_pos = {0, 0}, -- line, column
+  end_pos = {0, 0},
+  content = "",
+  length = 0,
+  __lt = function(a, b)
+    return compare_pos(a.start_pos, b.start_pos) > 0 and compare_pos(a.end_pos, b.end_pos) < 0
+  end,
+  __eq = function(a, b)
+    return compare_pos(a.start_pos, b.start_pos) == 0 and compare_pos(a.end_pos, b.end_pos) == 0
+  end
+}
+
+function Range:new(r)
+  setmetatable(r, Range)
+  return r
+end
+
+local function do_expand(text_object)
+  -- exec("normal! v")
+  exec("normal! v" .. text_object)
+  -- exec("normal! gv")
 end
 
 function get_selection_length(start_pos, end_pos)
-  lines = vim.fn.getline(start_pos[2], end_pos[2])
-  lines[1] = lines[1]:sub(start_pos[3])
-  lines[#lines] = lines[#lines]:sub(1, end_pos[3])
-  length = 0
-  for i, line in ipairs(lines) do
-    length = length + line:len()
+  if vim.deep_equal(start_pos, end_pos) then
+    return "", 0
   end
-  return length
+  local lines = vim.fn.getline(start_pos[2], end_pos[2])
+  local length = 0
+  if #lines == 1 then
+    lines = {lines[1]:sub(start_pos[3], end_pos[3])}
+  else
+    lines[1] = lines[1]:sub(start_pos[3])
+    lines[#lines] = lines[#lines]:sub(1, end_pos[3])
+  end
+  local content = ""
+  for _, line in ipairs(lines) do
+    length = length + line:len()
+    content = content .. line
+  end
+  return content, length
 end
 
-function M.expand()
+-- [(sdfsdfsdf)]
 
-  shortest = nil
-  for _, v in ipair(M.expand) do
-    result = M.get_candidate_dict(v)
-    if shortest == nil or shortest.length > result.length do
-      shortest = result
+function M.expand(mode)
+  M.mode = mode
+  local shortest = nil
+  for _, v in ipairs(M.expands) do
+    local result = M.get_best_match(v)
+    if result ~= nil then
+      if shortest == nil then
+        shortest = result
+      elseif result.length ~= 0 and shortest.length > result.length then
+        shortest = result
+      end
     end
   end
+  if shortest ~= nil then
+    do_expand(shortest.text_object)
+  else
+    -- if M.mode == "v" then
+    --   exec("normal! gv")
+    -- end
+  end
 end
 
-function do_expand()
+--- [ [123123] ]
+function M.get_best_match(text_object)
+  local selection = M.get_current_visual_selection()
+  if selection == nil then
+    selection = M.get_cursor_position()
+  end
+  local count = 1
+  local continue = true
+  local result
+  while continue do
+    result = M.get_candidate_dict(text_object, count)
+    if count == 100 then
+      puts(result)
+      puts(selection)
+      continue = false
+    end
+    if result.length == 0 then
+      result = nil
+      continue = false
+    elseif result > selection then
+      continue = false
+    else
+      count = count + 1
+    end
+  end
+  return result
 end
 
-function M.get_candidate_dict(text_object)
-  saved_window = vim.fn.winsaveview()
-  exec('normal! v', false)
-  exec('silent! normal '.. text_object, false)
-  exec([[normal! \<Esc>]], false)
+function M.get_candidate_dict(text_object, count)
+  local saved_window = vim.fn.winsaveview()
+  -- if M.mode == "v" then
+  --   exec(t("normal! <C-u>"))
+  -- end
+  exec("sil! norm! <ESC>v<ESC>v")
+  -- exec("normal! v")
+  -- end
+  exec("normal! " .. count .. text_object)
+  exec("normal! <Esc>")
 
-  result = M.get_visual_selection()
-  result["text_object"] = text_object
-  puts(result)
+  local result = M.get_visual_selection()
+  result["text_object"] = count .. text_object
   vim.fn.winrestview(saved_window)
   return result
 end
 
+function M.get_current_visual_selection()
+  if M.mode ~= "v" then
+    return
+  end
+  return M.get_visual_selection()
+end
+
+function M.get_cursor_position()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  return Range:new({start_pos = pos, end_pos = pos})
+end
 
 function M.get_visual_selection()
-  start_pos = vim.fn.getpos("'<")
-  end_pos = vim.fn.getpos("'>")
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
 
-  return {
+  local content, length = get_selection_length(start_pos, end_pos)
+
+  return Range:new {
     start_pos = {start_pos[2], start_pos[3]},
     end_pos = {end_pos[2], end_pos[3]},
-    length = get_selection_length(start_pos, end_pos)
+    length = length,
+    content = content
   }
 end
+
+M.in_visual_mode = in_visual_mode
 
 return M
