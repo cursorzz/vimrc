@@ -1,6 +1,5 @@
 local M = {
-  expands = {"i(", "i]", 'i"', "i'", "i)"}
-  -- expands = {"i]"}
+  candidates = {"i]", 'i"', "i'", "i)", "it", "i}", "i>"}
 }
 
 local function t(str)
@@ -12,7 +11,7 @@ local exec = function(cmd)
   vim.api.nvim_exec(t(cmd), true)
 end
 local puts = function(...)
-  print(vim.inspect(...))
+  print(vim.inspect({...}))
 end
 
 M.__index = M
@@ -81,8 +80,12 @@ end
 function M.expand(mode)
   M.mode = mode
   local shortest = nil
-  for _, v in ipairs(M.expands) do
-    local result = M.get_best_match(v)
+  local selection = M.get_current_visual_selection()
+  if selection == nil then
+    selection = M.get_cursor_position()
+  end
+  for _, v in ipairs(M.candidates) do
+    local result = M.get_best_match(selection, v)
     if result ~= nil then
       if shortest == nil then
         shortest = result
@@ -101,11 +104,7 @@ function M.expand(mode)
 end
 
 --- [ [123123] ]
-function M.get_best_match(text_object)
-  local selection = M.get_current_visual_selection()
-  if selection == nil then
-    selection = M.get_cursor_position()
-  end
+function M.get_best_match(selection, text_object)
   local count = 1
   local continue = true
   local result
@@ -121,6 +120,14 @@ function M.get_best_match(text_object)
       continue = false
     elseif result > selection then
       continue = false
+    elseif result == selection then
+      next_try = M.get_candidate_dict(text_object, count + 1)
+      if next_try == result then
+        -- not increase anymore
+        continue = false
+      else
+        count = count + 1
+      end
     else
       count = count + 1
     end

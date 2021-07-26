@@ -47,6 +47,7 @@ Plug 'ray-x/lsp_signature.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
+Plug 'nvim-treesitter/playground'
 
 Plug 'mhartington/formatter.nvim'
 
@@ -94,11 +95,12 @@ endfor
 luafile ~/.config/nvim/lua/init.lua
 
 function! DoReload(m) abort
+  echo "aaa"
   lua require('plenary.reload').reload_module('zac.firework', true)
   lua require('zac.firework').expand(vim.fn.eval("a:m"))
 endfunction
 
-nnoremap <CR> :call DoReload("n")<CR>
-xnoremap <CR> :<C-U>call DoReload("v")<CR>
+nnoremap <CR> :<C-u>call DoReload("n")<CR>
+xnoremap <CR> :<C-u>call DoReload("v")<CR>
 
 
