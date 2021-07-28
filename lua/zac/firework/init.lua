@@ -1,3 +1,4 @@
+local ts = require("nvim-treesitter.ts_utils")
 local M = {
   candidates = {"i]", 'i"', "i'", "i)", "it", "i}", "i>"}
 }
@@ -124,6 +125,7 @@ function M.get_best_match(selection, text_object)
       next_try = M.get_candidate_dict(text_object, count + 1)
       if next_try == result then
         -- not increase anymore
+        result = nil
         continue = false
       else
         count = count + 1
@@ -148,6 +150,7 @@ function M.get_candidate_dict(text_object, count)
 
   local result = M.get_visual_selection()
   result["text_object"] = count .. text_object
+  M._get_selected_node(result)
   vim.fn.winrestview(saved_window)
   return result
 end
@@ -176,6 +179,33 @@ function M.get_visual_selection()
     length = length,
     content = content
   }
+end
+
+function node_to_range(node)
+  local start_row, start_col, end_row, end_col = node:range()
+  return Range:new(
+    {
+      start_pos = {start_row, start_col},
+      end_pos = {end_row, end_col}
+    }
+  )
+end
+
+function M._get_selected_node(range)
+  local node = ts.get_node_at_cursor()
+  local node_range = node_to_range(node)
+  while node_range < range do
+    node = node:parent()
+    node_range = node_to_range(node)
+  end
+  puts(node_range)
+
+  -- local parser = vim.treesitter.get_parser(0):parse()
+  -- if #parser > 0 then
+  -- local root_node = parser[1]:root()
+  -- return root_node:descendant_for_range(range.start_pos[1], range.start_pos[2], range.end_pos[1], range.end_pos[2]):range(
+  -- )
+  -- end
 end
 
 M.in_visual_mode = in_visual_mode
