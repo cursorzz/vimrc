@@ -8,6 +8,7 @@ let g:tokyonight_style = "night"
 let g:tokyonight_dark_sidebar = "true"
 " colorscheme gruvbox
 colorscheme tokyonight
+" colorscheme aurora
 " colorscheme iceberg
 " colorscheme base16-schemer-dark
 
@@ -95,7 +96,7 @@ nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
 
 inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <CR>      compe#confirm({ 'keys': '<CR>', 'select': v:true })
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
@@ -127,3 +128,8 @@ autocmd InsertLeave * set nocul
 highlight TelescopeMatching       guifg=#E79921
 
 " au BufWritePost ~/.config/nvim/*.{vim,lua} so $MYVIMRC
+"
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
