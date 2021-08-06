@@ -7,6 +7,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'aserowy/tmux.nvim', { 'branch': 'main'}
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets', { 'branch': 'main'}
 
 " [Appearance]
 Plug 'hoob3rt/lualine.nvim'
@@ -48,6 +49,8 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 
 Plug 'mhartington/formatter.nvim'
+
+Plug 'jose-elias-alvarez/null-ls.nvim', {'branch': 'main'}
 Plug 'ray-x/aurora'
 
 call plug#end()
@@ -97,4 +100,5 @@ endfunction
 
 nnoremap <CR> :call DoReload("n")<CR>
 xnoremap <CR> :<C-U>call DoReload("v")<CR>
+
 

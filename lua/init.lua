@@ -12,12 +12,20 @@ vim.g.nvim_tree_show_icons = {
 -- require('zac.nvimux')
 --
 require("zac.treesitter")
+require("zac.null-ls")
 require("zac.lsp")
 require("zac.compe")
-require("zac.formatter")
+
+-- require("zac.formatter")
 
 require("gitsigns").setup()
-require("colorizer").setup()
+require("colorizer").setup(
+  {
+    css = {css = true},
+    html = {css = true},
+    scss = {css = true}
+  }
+)
 require("tmux").setup(
   {
     copy_sync = {

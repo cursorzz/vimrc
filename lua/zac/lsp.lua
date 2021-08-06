@@ -2,6 +2,13 @@ local lsp = require "lspconfig"
 local configs = require "lspconfig/configs"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local on_attach = function(client)
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+  end
+end
+
 configs.emmet_ls = {
   default_config = {
     cmd = {"emmet-ls", "--stdio"},
@@ -11,6 +18,11 @@ configs.emmet_ls = {
     end,
     settings = {}
   }
+}
+
+lsp.html.setup {
+  capabilities = capabilities,
+  filetypes = {"html", "vue"}
 }
 
 vim.lsp.set_log_level("debug")
@@ -36,38 +48,40 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 -- require'lspconfig'.emmet_ls.setup{
 --   on_attach = on_attach;
 -- }
-local sumneko_root_path = "/Users/zengzhi/Project/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
+if vim.fn.has("mac") == 1 then
+  local sumneko_root_path = "/Users/zengzhi/Project/lua-language-server"
+  local sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+  local runtime_path = vim.split(package.path, ";")
+  table.insert(runtime_path, "lua/?.lua")
+  table.insert(runtime_path, "lua/?/init.lua")
 
-lsp.sumneko_lua.setup {
-   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
+  lsp.sumneko_lua.setup {
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          -- Setup your lua path
+          path = runtime_path
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {"vim"}
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true)
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false
+        }
+      }
+    }
+  }
+end
 lsp.emmet_ls.setup {}
 
 lsp.vimls.setup {}
@@ -76,7 +90,8 @@ lsp.tsserver.setup {}
 -- npm install -g vscode-json-languageserver
 lsp.jsonls.setup {}
 lsp.gopls.setup {
-  on_attach = function()
+  on_attach = function(client)
+    -- client.resolved_capabilities.document_formatting = false
     require("lsp_signature").on_attach()
   end
 }
@@ -84,7 +99,7 @@ lsp.gopls.setup {
 lsp.vuels.setup {
   on_attach = function(client)
     require("lsp_signature").on_attach()
-    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.document_formatting = false
   end
 }
 -- npm install -g vscode-css-languageserver-bin
@@ -132,3 +147,10 @@ update_diagnostics_loclist = function()
 end
 
 vim.api.nvim_command [[autocmd! User LspDiagnosticsChanged lua update_diagnostics_loclist()]]
+
+
+
+
+lsp["null-ls"].setup({
+  on_attach = on_attach
+})

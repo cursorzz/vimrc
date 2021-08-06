@@ -3,7 +3,7 @@ syntax on                   " 开启语法高亮功能 允许用指定语法高�
 filetype plugin indent on   " 为特定文件类型载入相应缩进配置
 filetype on                 " 为特定文件类型载入相应文件类型插件
 set showmatch               " 显示匹配括号
-" set autochdir               " 自动切换当前目录为当前文件所在的目录  
+set autochdir               " 自动切换当前目录为当前文件所在的目录  
 set autoread                " 设置当文件被改动时自动载入
 set autowrite               " 自动保存
 " set confirm                 " 在处理未保存或只读文件的时候，弹出确认
