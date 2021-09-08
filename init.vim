@@ -41,7 +41,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 " https://github.com/windwp/nvim-spectre
 Plug 'windwp/nvim-spectre'
-Plug 'TimUntersberger/neogit'
+" Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
 
