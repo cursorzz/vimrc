@@ -49,7 +49,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 --   on_attach = on_attach;
 -- }
 if vim.fn.has("mac") == 1 then
-  local sumneko_root_path = "/Users/zengzhi/Project/lua-language-server"
+  local sumneko_root_path = "/Users/zaczeng/.config/nvim/binaries/lua-language-server"
   local sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
 
   local runtime_path = vim.split(package.path, ";")
@@ -58,6 +58,7 @@ if vim.fn.has("mac") == 1 then
 
   lsp.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    filetypes = { "lua" },
     settings = {
       Lua = {
         runtime = {
@@ -84,6 +85,7 @@ if vim.fn.has("mac") == 1 then
 end
 lsp.emmet_ls.setup {}
 
+-- npm i -g vim-language-server
 lsp.vimls.setup {}
 lsp.solargraph.setup {}
 lsp.tsserver.setup {}
@@ -138,7 +140,7 @@ end
 -- vim.lsp.util.buf_diagnostics_signs = function() return end
 -- vim.lsp.util.buf_diagnostics_virtual_text = function() return end
 
-update_diagnostics_loclist = function()
+local update_diagnostics_loclist = function()
   if vim.lsp.diagnostic.get_count(0, [[Error]]) > 0 then
     vim.lsp.diagnostic.set_loclist({open_loclist = false})
   else
@@ -146,7 +148,7 @@ update_diagnostics_loclist = function()
   end
 end
 
-vim.api.nvim_command [[autocmd! User LspDiagnosticsChanged lua update_diagnostics_loclist()]]
+-- vim.api.nvim_command [[autocmd! User LspDiagnosticsChanged lua update_diagnostics_loclist()]]
 
 
 
