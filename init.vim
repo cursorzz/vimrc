@@ -26,12 +26,19 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-Plug 'tomtom/tcomment_vim'
+" Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch' : 'main'}
+" Plug 'suy/vim-context-commentstring'
+
+" Plug 'terrortylor/nvim-comment'
 " " easy navigation tool
 " hop is an sneak alternative for easy navigation
 Plug 'phaazon/hop.nvim'  
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
+" Plug 'kdheepak/lazygit.nvim'
+
 Plug 'wakatime/vim-wakatime'
 Plug 'tjdevries/nlua.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -53,6 +60,10 @@ Plug 'mhartington/formatter.nvim'
 
 Plug 'jose-elias-alvarez/null-ls.nvim', {'branch': 'main'}
 Plug 'ray-x/aurora'
+
+" for legacy velox
+Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 

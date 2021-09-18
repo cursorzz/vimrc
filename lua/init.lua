@@ -93,7 +93,17 @@ require("lualine").setup {
   }
 }
 
-require "nvim-treesitter.configs".setup {}
+require "nvim-treesitter.configs".setup {
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ["<cr>"] = "textsubjects-smart"
+    }
+  },
+  context_commentstring = {
+    enable = true
+  }
+}
 
 -- require('base16-colorscheme').setup({
 --     base00 = '#16161D', base01 = '#3e4451', base02 = '#2c313c', base03 = '#565c64',
