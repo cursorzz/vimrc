@@ -5,9 +5,6 @@ Plug 'nvim-lua/plenary.nvim'
 " quick select inner content
 " color scheme
 Plug 'aserowy/tmux.nvim', { 'branch': 'main'}
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets', { 'branch': 'main'}
 
 " [Appearance]
 Plug 'hoob3rt/lualine.nvim'
@@ -22,9 +19,17 @@ Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
 Plug 'lewis6991/gitsigns.nvim', {'branch' : 'main'}
 
 " [Tab completion]
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
+Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
+Plug 'hrsh7th/cmp-path', {'branch': 'main'}
+Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
+
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets', { 'branch': 'main'}
+
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/vim-vsnip-integ'
 
 " Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
@@ -49,7 +54,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " https://github.com/windwp/nvim-spectre
 Plug 'windwp/nvim-spectre'
 " Plug 'TimUntersberger/neogit'
-Plug 'sindrets/diffview.nvim', {'branch': 'main'}
+" Plug 'sindrets/diffview.nvim', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'

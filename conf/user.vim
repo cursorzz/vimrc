@@ -47,6 +47,7 @@ nnoremap <leader>S :lua require('spectre').open()<CR>
 nnoremap <C-f> <cmd>lua require'zac.telescope'.git_files()<CR>
 nnoremap <C-g> <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
 nnoremap <C-b> <cmd>lua require'zac.telescope'.buffers()<CR>
+" nnoremap <Leader>\ <cmd>lua vim.lsp.buf.formatting()<CR>
 " try space way
 nnoremap <Space>f <cmd>lua require'zac.telescope'.git_files()<CR>
 nnoremap <Space>g <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
@@ -99,11 +100,11 @@ nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
 
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm({ 'keys': '<CR>', 'select': v:true })
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+" inoremap <silent><expr> <C-Space> compe#complete()
+" inoremap <silent><expr> <CR>      compe#confirm({ 'keys': '<CR>', 'select': v:true })
+" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'

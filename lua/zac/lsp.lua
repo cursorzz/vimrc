@@ -1,12 +1,13 @@
 local lsp = require "lspconfig"
 local configs = require "lspconfig/configs"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local on_attach = function(client)
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
-  end
+  -- if client.resolved_capabilities.document_formatting then
+  --   vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+  -- end
 end
 
 configs.emmet_ls = {
@@ -58,7 +59,7 @@ if vim.fn.has("mac") == 1 then
 
   lsp.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-    filetypes = { "lua" },
+    filetypes = {"lua"},
     settings = {
       Lua = {
         runtime = {
@@ -92,13 +93,17 @@ lsp.tsserver.setup {}
 -- npm install -g vscode-json-languageserver
 lsp.jsonls.setup {}
 lsp.gopls.setup {
+  capabilities = capabilities,
   on_attach = function(client)
     -- client.resolved_capabilities.document_formatting = false
+    --   --   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     require("lsp_signature").on_attach()
   end
 }
 -- npm install -g vls
 lsp.vuels.setup {
+  capabilities = capabilities,
   on_attach = function(client)
     require("lsp_signature").on_attach()
     client.resolved_capabilities.document_formatting = false
@@ -150,9 +155,8 @@ end
 
 -- vim.api.nvim_command [[autocmd! User LspDiagnosticsChanged lua update_diagnostics_loclist()]]
 
-
-
-
-lsp["null-ls"].setup({
-  on_attach = on_attach
-})
+lsp["null-ls"].setup(
+  {
+    on_attach = on_attach
+  }
+)
