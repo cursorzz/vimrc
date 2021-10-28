@@ -6,6 +6,7 @@ Plug 'nvim-lua/plenary.nvim'
 " color scheme
 Plug 'aserowy/tmux.nvim', { 'branch': 'main'}
 
+
 " [Appearance]
 Plug 'hoob3rt/lualine.nvim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
@@ -52,7 +53,6 @@ Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 " https://github.com/windwp/nvim-spectre
-Plug 'windwp/nvim-spectre'
 " Plug 'TimUntersberger/neogit'
 " Plug 'sindrets/diffview.nvim', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
@@ -70,6 +70,8 @@ Plug 'ray-x/aurora'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'kchmck/vim-coffee-script'
 
+Plug 'dyng/ctrlsf.vim'
+
 call plug#end()
 
 " Plug 'gcmt/wildfire.vim'
@@ -77,7 +79,6 @@ call plug#end()
 " Plug 'justinmk/vim-dirvish'
 " Plug 'RRethy/nvim-base16'
 " Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
-" Plug 'dyng/ctrlsf.vim'
 "
 " a colorscheme
 " Plug 'cocopon/iceberg.vim'  
