@@ -105,6 +105,12 @@ require "nvim-treesitter.configs".setup {
   }
 }
 
+require('nvim-tree').setup {
+  update_to_buf_dir = {
+    enable = true
+  }
+}
+
 -- require('base16-colorscheme').setup({
 --     base00 = '#16161D', base01 = '#3e4451', base02 = '#2c313c', base03 = '#565c64',
 --     base04 = '#6c7891', base05 = '#abb2bf', base06 = '#9a9bb3', base07 = '#c5c8e6',
