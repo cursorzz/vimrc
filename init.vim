@@ -33,7 +33,8 @@ Plug 'rafamadriz/friendly-snippets', { 'branch': 'main'}
 " Plug 'hrsh7th/vim-vsnip-integ'
 
 " Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
+Plug 'terrortylor/nvim-comment', {'branch' : 'main'}
 Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch' : 'main'}
 " Plug 'suy/vim-context-commentstring'
 
@@ -49,6 +50,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'tjdevries/nlua.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer' , { 'branch': 'main'}
 Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
