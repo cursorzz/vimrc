@@ -5,6 +5,8 @@ local lsp_installer = require("nvim-lsp-installer")
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+-- vim.lsp.set_log_level("debug")
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
@@ -61,25 +63,6 @@ lsp_installer.on_server_ready(
         }
       }
     end
-
-    -- if server.name == "emmet_ls" then
-    --   opts = {
-    --     default_config = {
-    --       cmd = {"emmet-ls", "--stdio"},
-    --       filetypes = {"html", "css"},
-    --       root_dir = require "lspconfig".util.root_pattern(".git", vim.fn.getcwd()),
-    --       settings = {}
-    --     }
-    --   }
-    -- end
-
-    -- (optional) Customize the options passed to the server
-    -- if server.name == "tsserver" then
-    --     opts.root_dir = function() ... end
-    -- end
-
-    -- This setup() function is exactly the same as lspconfig's setup function.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/ADVANCED_README.md
     server:setup(opts)
   end
 )
@@ -105,8 +88,6 @@ lsp["null-ls"].setup(
 --   capabilities = capabilities,
 --   filetypes = {"html", "vue"}
 -- }
-
-vim.lsp.set_log_level("debug")
 
 -- npm install -g emmet-ls
 -- require'lspconfig'.emmet_ls.setup{
