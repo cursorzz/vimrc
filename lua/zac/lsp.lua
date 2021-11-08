@@ -25,7 +25,7 @@ require "lspconfig/configs".emmet_ls = {
 
 local on_attach = function(client)
   if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()")
+    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)")
   end
 end
 
@@ -33,7 +33,18 @@ lsp_installer.on_server_ready(
   function(server)
     local opts = {
       capabilities = capabilities,
-      on_attach = function(_)
+      on_attach = function(client)
+        -- if server.name == "gopls" then
+        --   client.resolved_capabilities.document_formatting = false
+        -- end
+        local no_formattings = {"tsserver"}
+        for f in pairs(no_formattings) do
+          if server.name == f then
+            client.resolved_capabilities.document_formatting = false
+          end
+        end
+
+        on_attach(client)
         require("lsp_signature").on_attach()
       end
     }
@@ -41,11 +52,11 @@ lsp_installer.on_server_ready(
     if server.name == "sumneko_lua" then
       opts.settings = {
         Lua = {
-        workspace = {
-          maxPreload = 10000, -- Add this if missing or increase it
-          preloadFileSize = 10000, -- Add this if missing or increase it
-          checkThirdParty = false
-        }
+          workspace = {
+            maxPreload = 10000, -- Add this if missing or increase it
+            preloadFileSize = 10000, -- Add this if missing or increase it
+            checkThirdParty = false
+          }
         }
       }
     end
@@ -94,7 +105,7 @@ lsp["null-ls"].setup(
 --   filetypes = {"html", "vue"}
 -- }
 
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
 
 -- npm install -g emmet-ls
 -- require'lspconfig'.emmet_ls.setup{
