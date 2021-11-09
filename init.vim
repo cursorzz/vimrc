@@ -18,6 +18,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'ojroques/vim-oscyank', { 'branch': 'main'}
 " https://github.com/lewis6991/gitsigns.nvim
 Plug 'lewis6991/gitsigns.nvim', {'branch' : 'main'}
+Plug 'TimUntersberger/neogit'
 
 " [Tab completion]
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
@@ -63,10 +64,10 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'nvim-treesitter/playground'
 
-Plug 'mhartington/formatter.nvim'
+" Plug 'mhartington/formatter.nvim'
 
 Plug 'jose-elias-alvarez/null-ls.nvim', {'branch': 'main'}
-Plug 'ray-x/aurora'
+" Plug 'ray-x/aurora'
 
 " for legacy velox
 Plug 'joukevandermaas/vim-ember-hbs'

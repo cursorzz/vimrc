@@ -25,7 +25,7 @@ require "lspconfig/configs".emmet_ls = {
 
 local on_attach = function(client)
   if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)")
+    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 end
 
@@ -38,7 +38,8 @@ lsp_installer.on_server_ready(
         --   client.resolved_capabilities.document_formatting = false
         -- end
         local no_formattings = {"tsserver"}
-        for f in pairs(no_formattings) do
+        for _, f in pairs(no_formattings) do
+          print(f)
           if server.name == f then
             client.resolved_capabilities.document_formatting = false
           end
