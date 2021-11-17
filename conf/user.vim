@@ -141,3 +141,5 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 
 
 let g:ctrlsf_default_root = 'project'
+
+command! Gcommit Git<space>commit
