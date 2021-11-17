@@ -39,7 +39,7 @@ lsp_installer.on_server_ready(
         -- if server.name == "gopls" then
         --   client.resolved_capabilities.document_formatting = false
         -- end
-        local no_formattings = {"tsserver"}
+        local no_formattings = {"tsserver", "jsonls"}
         for _, f in pairs(no_formattings) do
           print(f)
           if server.name == f then
