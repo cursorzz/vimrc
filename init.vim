@@ -75,13 +75,18 @@ Plug 'kchmck/vim-coffee-script'
 
 Plug 'dyng/ctrlsf.vim'
 
+" for debug
+"
+Plug 'Tastyep/structlog.nvim', {'branch': 'main'}
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'master'}
+
 call plug#end()
 
 " Plug 'gcmt/wildfire.vim'
 " Plug 'lifepillar/vim-gruvbox8'
 " Plug 'justinmk/vim-dirvish'
 " Plug 'RRethy/nvim-base16'
-" Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+"
 "
 " a colorscheme
 " Plug 'cocopon/iceberg.vim'  

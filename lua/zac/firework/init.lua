@@ -1,54 +1,21 @@
+local exec = require("./utils").exec
+local puts = require("./utils").puts
+local t = require("./utils").t
+-- require("./utils")
 local ts = require("nvim-treesitter.ts_utils")
+local Range = require("./range")
 local M = {
   candidates = {"i]", 'i"', "i'", "i)", "it", "i}", "i>"}
 }
-
-local function t(str)
-  -- Adjust boolean arguments as needed
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local exec = function(cmd)
-  vim.api.nvim_exec(t(cmd), true)
-end
-local puts = function(...)
-  print(vim.inspect({...}))
-end
-
 M.__index = M
--- nagative means a < b.  0 means a == b
-function compare_pos(a, b)
-  if a[1] < b[1] then
-    return -1
-  elseif a[1] == b[1] then
-    return a[2] - b[2]
-  else
-    return 1
-  end
-end
+
 
 local function in_visual_mode(m)
   local mode = vim.fn.mode()
   return mode == "v"
 end
 
-Range = {
-  start_pos = {0, 0}, -- line, column
-  end_pos = {0, 0},
-  content = "",
-  length = 0,
-  __lt = function(a, b)
-    return compare_pos(a.start_pos, b.start_pos) > 0 and compare_pos(a.end_pos, b.end_pos) < 0
-  end,
-  __eq = function(a, b)
-    return compare_pos(a.start_pos, b.start_pos) == 0 and compare_pos(a.end_pos, b.end_pos) == 0
-  end
-}
-
-function Range:new(r)
-  setmetatable(r, Range)
-  return r
-end
+-- nagative means a < b.  0 means a == b
 
 local function do_expand(text_object)
   -- exec("normal! v")
@@ -171,14 +138,15 @@ function M.get_visual_selection()
   local start_pos = vim.fn.getpos("'<")
   local end_pos = vim.fn.getpos("'>")
 
-  local content, length = get_selection_length(start_pos, end_pos)
+  local range =
+    Range:new(
+    {
+      start_pos = start_pos,
+      end_pos = end_pos
+    }
+  )
 
-  return Range:new {
-    start_pos = {start_pos[2], start_pos[3]},
-    end_pos = {end_pos[2], end_pos[3]},
-    length = length,
-    content = content
-  }
+  return range
 end
 
 function node_to_range(node)
