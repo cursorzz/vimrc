@@ -1,20 +1,32 @@
-local log = require("structlog")
-
-local logger =
-  log.Logger(
-  "firework.nvim",
-  {
-    log.sinks.Console(
-      log.level.INFO,
-      {
-        processors = {
-          log.processors.Namer(),
-          log.processors.Timestamper("%H:%M:%S")
-        },
-        formatter = log.formatters.Format("%s [%s] %s: %-30s", {"timestamp", "level", "logger_name", "msg"}) --
-      }
-    )
-  }
-)
-
-return logger
+-- local log = require("structlog")
+-- 
+-- local logger =
+--   log.Logger(
+--   "firework.nvim",
+--   {
+--     log.sinks.Console(
+--       log.level.DEBUG,
+--       {
+--         processors = {
+--           log.processors.Namer(),
+--           log.processors.Timestamper("%H:%M:%S")
+--         },
+--         formatter = log.formatters.Format("%s [%s] %s: %-30s", {"timestamp", "level", "logger_name", "msg"}) --
+--       }
+--     ),
+--     -- log.sinks.File(
+--     --   log.level.TRACE,
+--     --   "./test.log",
+--     --   {
+--     --     processors = {
+--     --       log.processors.Namer(),
+--     --       log.processors.StackWriter({"line", "file"}, {max_parents = 3}),
+--     --       log.processors.Timestamper("%H:%M:%S")
+--     --     },
+--     --     formatter = log.formatters.Format("%s [%s] %s: %-30s", {"timestamp", "level", "logger_name", "msg"}) --
+--     --   }
+--     -- )
+--   }
+-- )
+-- 
+-- return logger

@@ -80,6 +80,8 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'Tastyep/structlog.nvim', {'branch': 'main'}
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'master'}
 
+Plug 'folke/zen-mode.nvim', {'branch': 'main'}
+
 call plug#end()
 
 " Plug 'gcmt/wildfire.vim'
@@ -119,13 +121,12 @@ endfor
 
 luafile ~/.config/nvim/lua/init.lua
 
-function! DoReload(m) abort
-  echo "aaa"
+function! DoReload(m)
+  lua package.loaded['zac.firework'] = nil
   lua require('plenary.reload').reload_module('zac.firework', true)
   lua require('zac.firework').expand(vim.fn.eval("a:m"))
 endfunction
-
-nnoremap <CR> :<C-u>call DoReload("n")<CR>
-xnoremap <CR> :<C-u>call DoReload("v")<CR>
-
-
+" ( (123123) )
+"
+nnoremap <CR> :<C-U>call DoReload("n")<CR>
+xnoremap <CR> :<C-U>call DoReload("v")<CR>

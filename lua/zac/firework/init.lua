@@ -1,26 +1,42 @@
-local exec = require("./utils").exec
-local puts = require("./utils").puts
-local t = require("./utils").t
+function _G.put(...)
+  local objects = {init}
+  for i = 1, select("#", ...) do
+    local v = select(i, ...)
+    table.insert(objects, vim.inspect(v))
+  end
+
+  print(table.concat(objects, " "))
+  return ...
+end
+
+local exec = require("zac.firework.utils").exec
+local t = require("zac.firework.utils").t
 -- require("./utils")
 local ts = require("nvim-treesitter.ts_utils")
-local Range = require("./range")
+local Range = require("zac.firework.range")
+-- local logger = require("./log")
 local M = {
-  candidates = {"i]", 'i"', "i'", "i)", "it", "i}", "i>"}
+  candidates = {"i]", "i[", 'i"', "i'", "i)", "it", "i}", "i>", "i`"}
+  -- candidates = {"i)"}
 }
-M.__index = M
 
-
-local function in_visual_mode(m)
-  local mode = vim.fn.mode()
-  return mode == "v"
+function M.setup(config)
+  put(config)
 end
+-- M.__index = M
 
 -- nagative means a < b.  0 means a == b
 
-local function do_expand(text_object)
-  -- exec("normal! v")
-  exec("normal! v" .. text_object)
-  -- exec("normal! gv")
+local function update_selection(range)
+  local start_row, start_col = unpack(range.start_pos)
+  local end_row, end_col = unpack(range.end_pos)
+
+  local buf = vim.api.nvim_get_current_buf()
+
+  vim.fn.setpos(".", {buf, start_row, start_col, 0})
+  local mode_string = vim.api.nvim_replace_termcodes("v", true, true, true)
+  vim.cmd("normal! " .. mode_string)
+  vim.fn.setpos(".", {buf, end_row, end_col, 0})
 end
 
 function get_selection_length(start_pos, end_pos)
@@ -43,7 +59,7 @@ function get_selection_length(start_pos, end_pos)
   return content, length
 end
 
--- [(sdfsdfsdf)]
+-- [(s)]
 
 function M.expand(mode)
   M.mode = mode
@@ -52,73 +68,90 @@ function M.expand(mode)
   if selection == nil then
     selection = M.get_cursor_position()
   end
+  -- put("(*", selection)
   for _, v in ipairs(M.candidates) do
     local result = M.get_best_match(selection, v)
     if result ~= nil then
+      -- if result.length > selection.length
       if shortest == nil then
+        -- put(result)
         shortest = result
-      elseif result.length ~= 0 and shortest.length > result.length then
-        shortest = result
+      else
+        -- ((0 ))
+        if result.length ~= 0 and result.length < shortest.length then
+          shortest = result
+        end
       end
     end
   end
   if shortest ~= nil then
-    do_expand(shortest.text_object)
+    -- put(shortest)
+    update_selection(shortest)
   else
-    -- if M.mode == "v" then
-    --   exec("normal! gv")
-    -- end
+    -- put("sdfdsf", selection, )
+    if M.mode == "v" then
+      update_selection(selection)
+    end
   end
 end
 
 --- [ [123123] ]
 function M.get_best_match(selection, text_object)
   local count = 1
-  local continue = true
   local result
-  while continue do
+  -- put("selection", selection.start_pos)
+  -- (0)
+  while true do
     result = M.get_candidate_dict(text_object, count)
-    if count == 100 then
-      puts(result)
-      puts(selection)
-      continue = false
-    end
-    if result.length == 0 then
-      result = nil
-      continue = false
-    elseif result > selection then
-      continue = false
-    elseif result == selection then
-      next_try = M.get_candidate_dict(text_object, count + 1)
-      if next_try == result then
-        -- not increase anymore
-        result = nil
-        continue = false
-      else
-        count = count + 1
+    -- put(result)
+
+    if result.matched then
+      if result > selection then
+        -- put(result.content, result.text_object)
+        break
       end
-    else
+      if result == selection then
+        next_try = M.get_candidate_dict(text_object, count + 1)
+        if next_try == result then
+          break
+        -- not increase anymore
+        end
+      end
       count = count + 1
+    else
+      result = nil
+      break
     end
   end
+  -- if result ~= nil then
+  -- put("**********", result)
+  -- end
   return result
 end
 
 function M.get_candidate_dict(text_object, count)
   local saved_window = vim.fn.winsaveview()
-  -- if M.mode == "v" then
-  --   exec(t("normal! <C-u>"))
-  -- end
   exec("sil! norm! <ESC>v<ESC>v")
-  -- exec("normal! v")
-  -- end
   exec("normal! " .. count .. text_object)
   exec("normal! <Esc>")
 
   local result = M.get_visual_selection()
   result["text_object"] = count .. text_object
-  M._get_selected_node(result)
+
+  exec("sil! norm! <ESC>v<ESC>v")
+  exec("normal! " .. count .. text_object:gsub("i", "a"))
+  exec("normal! <Esc>")
+  local outer_result = M.get_visual_selection()
+  outer_result["text_object"] = count .. text_object:gsub("i", "a")
+
+  -- put("***********", result, outer_result)
+
+  -- M._get_selected_node(result)
   vim.fn.winrestview(saved_window)
+
+  if result ~= outer_result then
+    result.matched = true
+  end
   return result
 end
 
@@ -126,12 +159,15 @@ function M.get_current_visual_selection()
   if M.mode ~= "v" then
     return
   end
-  return M.get_visual_selection()
+  return M.get_visual_selection(text_object)
 end
 
 function M.get_cursor_position()
   local pos = vim.api.nvim_win_get_cursor(0)
-  return Range:new({start_pos = pos, end_pos = pos})
+  pos[2] = pos[2] + 1
+  local range = Range:new({start_pos = pos, end_pos = pos})
+  range.length = 0
+  return range
 end
 
 function M.get_visual_selection()
@@ -141,8 +177,9 @@ function M.get_visual_selection()
   local range =
     Range:new(
     {
-      start_pos = start_pos,
-      end_pos = end_pos
+      start_pos = {start_pos[2], start_pos[3]},
+      end_pos = {end_pos[2], end_pos[3]},
+      visual = true
     }
   )
 
@@ -166,16 +203,6 @@ function M._get_selected_node(range)
     node = node:parent()
     node_range = node_to_range(node)
   end
-  puts(node_range)
-
-  -- local parser = vim.treesitter.get_parser(0):parse()
-  -- if #parser > 0 then
-  -- local root_node = parser[1]:root()
-  -- return root_node:descendant_for_range(range.start_pos[1], range.start_pos[2], range.end_pos[1], range.end_pos[2]):range(
-  -- )
-  -- end
 end
-
-M.in_visual_mode = in_visual_mode
 
 return M

@@ -15,13 +15,14 @@ require("zac.lsp")
 require("zac.compe")
 
 require("gitsigns").setup()
-require("colorizer").setup(
-  {
-    css = {css = true},
-    html = {css = true},
-    scss = {css = true}
-  }
-)
+-- require("colorizer").setup(
+--   {
+--     css = {css = true},
+--     html = {css = true},
+--     scss = {css = true}
+--   }
+-- )
+require 'colorizer'.setup()
 require("tmux").setup(
   {
     copy_sync = {
@@ -54,12 +55,12 @@ require("lualine").setup {
 }
 
 require "nvim-treesitter.configs".setup {
-  textsubjects = {
-    enable = true,
-    keymaps = {
-      ["<cr>"] = "textsubjects-smart"
-    }
-  },
+  -- textsubjects = {
+  --   enable = true,
+  --   keymaps = {
+  --     ["<cr>"] = "textsubjects-smart"
+  --   }
+  -- },
   context_commentstring = {
     enable = true,
     enable_autocmd = false
