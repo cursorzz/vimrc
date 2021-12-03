@@ -1,13 +1,6 @@
 -- nvim tree seems has a bug related to git
 -- which makes startup and save extremly slow, see this
 -- https://github.com/kyazdani42/nvim-tree.lua/issues/453
-vim.g.nvim_tree_git_hl = 0
-vim.g.nvim_tree_gitignore = 0
-vim.g.nvim_tree_show_icons = {
-  git = 0,
-  folders = 1,
-  files = 1
-}
 
 require("zac.treesitter")
 require("zac.null-ls")
@@ -80,6 +73,15 @@ require("nvim-tree").setup {
     enable = true
   }
 }
+
+-- vim.g.nvim_tree_git_hl = 0
+-- vim.g.nvim_tree_gitignore = 0
+-- vim.g.nvim_tree_show_icons = {
+--   git = 0,
+--   folders = 1,
+--   files = 1
+-- }
+-- }
 
 require("indent_blankline").setup {
     char = "|",

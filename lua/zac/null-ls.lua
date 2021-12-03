@@ -20,9 +20,10 @@ local lua_fmt =
 
 local sources = {
   ls.builtins.formatting.prettier,
+  ls.builtins.diagnostics.write_good,
   -- ls.builtins.formatting.gofmt,
   -- ls.builtins.formatting.gofumpt,
-  ls.builtins.formatting.tsserver,
+  ls.builtins.formatting.eslint_d,
   -- client.resolved_capabilities.document_formatting = false
   lua_fmt
   -- ls.builtins.formatting.gofmt

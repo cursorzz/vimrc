@@ -72,9 +72,9 @@ function M.expand(mode)
   for _, v in ipairs(M.candidates) do
     local result = M.get_best_match(selection, v)
     if result ~= nil then
+        put(result)
       -- if result.length > selection.length
       if shortest == nil then
-        -- put(result)
         shortest = result
       else
         -- ((0 ))
