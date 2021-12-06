@@ -15,7 +15,7 @@ require("gitsigns").setup()
 --     scss = {css = true}
 --   }
 -- )
-require 'colorizer'.setup()
+require "colorizer".setup()
 require("tmux").setup(
   {
     copy_sync = {
@@ -71,6 +71,12 @@ require("nvim_comment").setup(
 require("nvim-tree").setup {
   update_to_buf_dir = {
     enable = true
+  },
+  git = {
+    enable = false
+    -- ignore = true,
+    -- timeout = 500
+    --
   }
 }
 
@@ -84,6 +90,6 @@ require("nvim-tree").setup {
 -- }
 
 require("indent_blankline").setup {
-    char = "|",
-    buftype_exclude = {"terminal"}
+  char = "|",
+  buftype_exclude = {"terminal"}
 }
