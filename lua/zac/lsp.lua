@@ -25,11 +25,6 @@ require "lspconfig/configs".emmet_ls = {
   }
 }
 
-local on_attach = function(client)
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()")
-  end
-end
 
 lsp_installer.on_server_ready(
   function(server)
@@ -67,11 +62,6 @@ lsp_installer.on_server_ready(
   end
 )
 
-lsp["null-ls"].setup(
-  {
-    on_attach = on_attach
-  }
-)
 
 -- configs.emmet_ls = {
 --   default_config = {

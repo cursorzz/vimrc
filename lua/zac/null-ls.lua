@@ -29,4 +29,10 @@ local sources = {
   -- ls.builtins.formatting.gofmt
 }
 
-ls.config({sources = sources})
+local on_attach = function(client)
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
+end
+
+ls.setup({sources = sources, on_attach = on_attach})
