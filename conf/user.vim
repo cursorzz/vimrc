@@ -45,12 +45,13 @@ nnoremap <Leader>c :tabonly<CR>
 nnoremap <leader>S :lua require('spectre').open()<CR>
 
 nnoremap <C-f> <cmd>lua require'zac.telescope'.git_files()<CR>
-nnoremap <C-g> <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
+" nnoremap <C-g> <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
+nnoremap <C-g> <cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>
 nnoremap <C-b> <cmd>lua require'zac.telescope'.buffers()<CR>
 " nnoremap <Leader>\ <cmd>lua vim.lsp.buf.formatting()<CR>
 " try space way
 nnoremap <Space>f <cmd>lua require'zac.telescope'.git_files()<CR>
-nnoremap <Space>g <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
+" nnoremap <Space>g <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
 nnoremap <Space>b <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
 nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>

@@ -7,15 +7,20 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- vim.lsp.set_log_level("debug")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    -- Disable signs
-    virtual_text = false
-    -- signs = false,
-  }
-)
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+--   vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics,
+--   {
+--     -- Disable signs
+--     virtual_text = false
+--     -- signs = false,
+--   }
+-- )
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    float = { border = "single" },
+})
 
 require "lspconfig/configs".emmet_ls = {
   default_config = {

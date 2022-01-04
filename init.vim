@@ -24,14 +24,12 @@ Plug 'TimUntersberger/neogit'
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
 Plug 'hrsh7th/cmp-path', {'branch': 'main'}
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
 Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets', { 'branch': 'main'}
-
-" Plug 'hrsh7th/vim-vsnip'
-" Plug 'hrsh7th/vim-vsnip-integ'
 
 " Plug 'tomtom/tcomment_vim'
 " Plug 'tpope/vim-commentary'
@@ -54,7 +52,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer' , { 'branch': 'main'}
 Plug 'nvim-lua/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'rebelot/kanagawa.nvim'
 " https://github.com/windwp/nvim-spectre
 " Plug 'TimUntersberger/neogit'
 " Plug 'sindrets/diffview.nvim', {'branch': 'main'}
@@ -81,6 +81,10 @@ Plug 'Tastyep/structlog.nvim', {'branch': 'main'}
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'master'}
 
 Plug 'folke/zen-mode.nvim', {'branch': 'main'}
+
+
+Plug 'casonadams/walh', {'branch': 'main'}
+
 
 call plug#end()
 

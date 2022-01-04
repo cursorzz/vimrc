@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
+local fb_actions = require "telescope".extensions.file_browser.actions
 local M = {}
 local default_theme =
   require("telescope.themes").get_dropdown(
@@ -13,16 +14,37 @@ local default_theme =
     }
   }
 )
-require("telescope").load_extension("fzy_native")
 require "telescope".setup {
   defaults = default_theme,
   extensions = {
     fzy_native = {
       override_generic_sorter = false,
       override_file_sorter = true
+    },
+    file_browser = {
+      previewer = false,
+      initial_mode = "normal",
+      theme = "dropdown",
     }
   }
 }
+
+-- mappings = {
+--   ["i"] = {
+--     ["<C-j>"] = actions.move_selection_next,
+--     ["<C-k>"] = actions.move_selection_previous,
+--     ["<c-h>"] = fb_actions.goto_parent_dir,
+--     ["<c-d>"] = fb_actions.remove_file,
+--     ["<c-n>"] = fb_actions.create_file
+--     -- ["<esc>"] = actions.close
+--   }
+--   -- ["c"] = fb_actions.create_file,
+--   -- ["r"] = fb_actions.rename_file,
+--   -- ["<cr>"] = fb_actions.open_file
+-- }
+
+require("telescope").load_extension("fzy_native")
+require("telescope").load_extension "file_browser"
 
 M.search_dotfiles = function()
   require("telescope.builtin").find_files(
