@@ -1,6 +1,7 @@
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
-local fb_actions = require "telescope".extensions.file_browser.actions
+local fb_actions = require("telescope").extensions.file_browser.actions
+-- print(vim.inspect(fb_actions))
 local M = {}
 local default_theme =
   require("telescope.themes").get_dropdown(
@@ -23,8 +24,19 @@ require "telescope".setup {
     },
     file_browser = {
       previewer = false,
-      initial_mode = "normal",
+      -- initial_mode = "normal",
       theme = "dropdown",
+      mappings = {
+        i = {
+          ["<c-j>"] = actions.move_selection_next,
+          ["<c-k>"] = actions.move_selection_previous,
+          ["<c-h>"] = fb_actions.goto_parent_dir,
+          ["<c-l>"] = actions.select_default,
+          ["<c-a>"] = fb_actions.create,
+          ["<c-r>"] = fb_actions.rename,
+          ["<esc>"] = actions.close
+        }
+      }
     }
   }
 }
