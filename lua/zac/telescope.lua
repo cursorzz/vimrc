@@ -33,6 +33,10 @@ require "telescope".setup {
           ["<c-h>"] = fb_actions.goto_parent_dir,
           ["<c-l>"] = actions.select_default,
           ["<c-a>"] = fb_actions.create,
+          ["<C-x>"] = actions.select_horizontal,
+          ["<C-v>"] = actions.select_vertical,
+          ["<C-t>"] = actions.select_tab,
+
           ["<c-r>"] = fb_actions.rename,
           ["<esc>"] = actions.close
         }
