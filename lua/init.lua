@@ -1,6 +1,9 @@
 -- nvim tree seems has a bug related to git
 -- which makes startup and save extremly slow, see this
 -- https://github.com/kyazdani42/nvim-tree.lua/issues/453
+--
+require("settings/options")
+require("settings/mappings")
 
 require("zac.treesitter")
 require("zac.null-ls")

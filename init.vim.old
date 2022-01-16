@@ -1,0 +1,25 @@
+
+"" let s:configs = [
+"    \'basic.vim',
+"    \'user.vim'
+"    \]
+" 
+" for s:path in s:configs
+"   exe 'source ' .'~/.config/nvim/conf/'.s:path
+" endfor
+" 
+"
+lua require("plugins")
+lua require("init")
+" luafile ~/.config/nvim/lua/init.lua
+
+" function! DoReload(m)
+"   lua package.loaded['zac.firework'] = nil
+"   lua require('plenary.reload').reload_module('zac.firework', true)
+"   lua require('zac.firework').expand(vim.fn.eval("a:m"))
+" endfunction
+" " ( (123123) )
+" "
+" nnoremap <CR> :<C-U>call DoReload("n")<CR>
+" xnoremap <CR> :<C-U>call DoReload("v")<CR>
+

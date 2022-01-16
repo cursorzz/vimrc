@@ -1,3 +1,5 @@
+vim.cmd([[
+
 set bg=dark                 " 暗色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
 " colorscheme palenight
@@ -144,3 +146,4 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 let g:ctrlsf_default_root = 'project'
 
 command! Gcommit Git<space>commit
+]])
