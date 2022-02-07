@@ -1,5 +1,5 @@
 local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
+-- local action_state = require("telescope.actions.state")
 local fb_actions = require("telescope").extensions.file_browser.actions
 -- print(vim.inspect(fb_actions))
 local M = {}
@@ -15,6 +15,13 @@ local default_theme =
     }
   }
 )
+
+-- local function fb_actions(f)
+--   return function(b)
+--     require "telescope".extensions.file_browser.actions[f](b)
+--   end
+-- end
+
 require "telescope".setup {
   defaults = default_theme,
   extensions = {
@@ -36,7 +43,6 @@ require "telescope".setup {
           ["<C-x>"] = actions.select_horizontal,
           ["<C-v>"] = actions.select_vertical,
           ["<C-t>"] = actions.select_tab,
-
           ["<c-r>"] = fb_actions.rename,
           ["<esc>"] = actions.close
         }
@@ -44,20 +50,6 @@ require "telescope".setup {
     }
   }
 }
-
--- mappings = {
---   ["i"] = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<c-h>"] = fb_actions.goto_parent_dir,
---     ["<c-d>"] = fb_actions.remove_file,
---     ["<c-n>"] = fb_actions.create_file
---     -- ["<esc>"] = actions.close
---   }
---   -- ["c"] = fb_actions.create_file,
---   -- ["r"] = fb_actions.rename_file,
---   -- ["<cr>"] = fb_actions.open_file
--- }
 
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension "file_browser"
@@ -72,21 +64,18 @@ M.search_dotfiles = function()
   )
 end
 
-local function to_parent_folder(buf, map)
-end
-
 -- override builtins
 
-M.find_in_current_folder = function()
-  local path = vim.fn.expand("%:p:h")
-  require "telescope.builtin".file_browser(
-    {
-      previewer = false,
-      prompt_title = path,
-      cwd = path
-    }
-  )
-end
+-- M.find_in_current_folder = function()
+--   local path = vim.fn.expand("%:p:h")
+--   require "telescope.builtin".file_browser(
+--     {
+--       previewer = false,
+--       prompt_title = path,
+--       cwd = path
+--     }
+--   )
+-- end
 
 M.find_files = function()
   require "telescope.builtin".find_files(

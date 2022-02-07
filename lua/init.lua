@@ -9,6 +9,7 @@ require("zac.treesitter")
 require("zac.null-ls")
 require("zac.lsp")
 require("zac.compe")
+require("zac.telescope")
 
 require("gitsigns").setup()
 -- require("colorizer").setup(

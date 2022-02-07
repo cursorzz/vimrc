@@ -2,6 +2,7 @@ local lsp = require "lspconfig"
 -- local configs = require "lspconfig/configs"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer_servers = require "nvim-lsp-installer.servers"
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
@@ -16,11 +17,13 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 --     -- signs = false,
 --   }
 -- )
-vim.diagnostic.config({
+vim.diagnostic.config(
+  {
     virtual_text = false,
     signs = true,
-    float = { border = "single" },
-})
+    float = {border = "single"}
+  }
+)
 
 require "lspconfig/configs".emmet_ls = {
   default_config = {
@@ -36,9 +39,21 @@ local on_attach = function(client)
   end
 end
 
+local function ensure_servers_installed()
+  local ensure_servers = {"gopls", "sumneko_lua", "solargraph", "vuels", "cssls", "html", "emmet_ls"}
+  for _, f in pairs(ensure_servers) do
+    local server_available, server = lsp_installer_servers.get_server(f)
+    if server_available then
+      if not server:is_installed() then
+        server:install()
+      end
+    end
+  end
+end
 
 lsp_installer.on_server_ready(
   function(server)
+    ensure_servers_installed()
     local opts = {
       capabilities = capabilities,
       on_attach = function(client)
@@ -73,10 +88,9 @@ lsp_installer.on_server_ready(
   end
 )
 
-
 -- configs.emmet_ls = {
 --   default_config = {
---     cmd = {"emmet-ls", "--stdio"},
+--     cmd = {"emmet-ls", "--stdio"}
 --     filetypes = {"html", "css"},
 --     root_dir = function()
 --       return vim.loop.cwd()
