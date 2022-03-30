@@ -1,4 +1,5 @@
-vim.cmd([[
+vim.cmd(
+  [[
 
 set bg=dark                 " 暗色主题
 " colorscheme Tomorrow-Night-Eighties         " 颜色主题
@@ -66,8 +67,8 @@ tnoremap <Esc> <C-\><C-n>
 
 
 " NERDTree config
-noremap <Leader>t :NvimTreeToggle<CR>
-noremap <Leader>e :NvimTreeFindFile<CR>
+noremap <Leader>t :Neotree reveal=true toggle<CR>
+noremap <Leader>e :Neotree reveal=true toggle<CR>
 
 " nnoremap <Leader>vi :e $MYVIMRC<CR> 
 nnoremap <Leader>r :source $MYVIMRC<CR> 
@@ -146,4 +147,5 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 let g:ctrlsf_default_root = 'project'
 
 command! Gcommit Git<space>commit
-]])
+]]
+)

@@ -38,18 +38,18 @@ require("tmux").setup(
   }
 )
 
-require("lualine").setup {
-  options = {section_separators = "", component_separators = "", theme = "wombat"},
-  sections = {
-    lualine_c = {
-      {
-        "filename",
-        file_status = true, -- displays file status (readonly status, modified status)
-        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-      }
-    }
-  }
-}
+-- require("lualine").setup {
+--  options = {section_separators = "", component_separators = "", theme = "wombat"},
+--  sections = {
+--    lualine_c = {
+--      {
+--        "filename",
+--        file_status = true, -- displays file status (readonly status, modified status)
+--        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+--      }
+--    }
+--  }
+--}
 
 require "nvim-treesitter.configs".setup {
   -- textsubjects = {
@@ -72,29 +72,35 @@ require("nvim_comment").setup(
   }
 )
 
-require("nvim-tree").setup {
-  -- update_to_buf_dir = {
-  --   enable = true
-  -- },
-  update_focused_file = {
-    enable = false,
-    update_cwd = false,
-    ignore_list = {}
-  },
-  git = {
-    enable = false,
-    ignore = false,
-    timeout = 1
-    --
-  }
-}
+require("neo-tree").setup({
+  enable_git_status = false
 
-vim.g.nvim_tree_show_icons = {
-  git = 0,
-  folders = 1, -- or 0,
-  files = 1, -- or 0,
-  folder_arrows = 1 -- or 0
-}
+})
+
+-- require("nvim-tree").setup {
+--   -- update_to_buf_dir = {
+--   --   enable = true
+--   -- },
+--     update_to_buf_dir = { enable = false },
+--   update_focused_file = {
+--     enable = false,
+--     update_cwd = false,
+--     ignore_list = {}
+--   },
+--   git = {
+--     enable = false,
+--     ignore = false,
+--     timeout = 1
+--     --
+--   }
+-- }
+
+-- vim.g.nvim_tree_show_icons = {
+--   git = 0,
+--   folders = 1, -- or 0,
+--   files = 1, -- or 0,
+--   folder_arrows = 1 -- or 0
+-- }
 -- vim.g.nvim_tree_git_hl = 0
 
 -- vim.g.nvim_tree_git_hl = 0
