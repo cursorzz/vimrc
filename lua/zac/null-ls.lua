@@ -17,16 +17,10 @@ local lua_fmt =
     factory = h.formatter_factory
   }
 )
-
+--
 local sources = {
-  ls.builtins.formatting.prettier,
-  ls.builtins.diagnostics.write_good,
-  -- ls.builtins.formatting.gofmt,
-  -- ls.builtins.formatting.gofumpt,
-  ls.builtins.formatting.eslint_d,
-  -- client.resolved_capabilities.document_formatting = false
+  ls.builtins.formatting.prettierd.with({filetypes = {"javascript", "json", "html", "typescript", "vue"}}),
   lua_fmt
-  -- ls.builtins.formatting.gofmt
 }
 
 local on_attach = function(client)
@@ -34,5 +28,5 @@ local on_attach = function(client)
     vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 end
-
+--
 ls.setup({sources = sources, on_attach = on_attach})

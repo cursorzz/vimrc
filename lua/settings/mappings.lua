@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 vim.cmd(
   [[
 
@@ -47,20 +49,11 @@ nnoremap <Leader>c :tabonly<CR>
 
 nnoremap <leader>S :lua require('spectre').open()<CR>
 
-nnoremap <C-f> <cmd>lua require'zac.telescope'.git_files()<CR>
-" nnoremap <C-g> <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
-nnoremap <C-g> <cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>
-nnoremap <C-b> <cmd>lua require'zac.telescope'.buffers()<CR>
-" nnoremap <Leader>\ <cmd>lua vim.lsp.buf.formatting()<CR>
-" try space way
-nnoremap <Space>f <cmd>lua require'zac.telescope'.git_files()<CR>
-" nnoremap <Space>g <cmd>lua require'zac.telescope'.find_in_current_folder()<CR>
-nnoremap <Space>b <cmd>lua require'zac.telescope'.buffers()<CR>
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
 nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>p <cmd>lua require'zac.telescope'.grep_find()<CR>
-nnoremap f <cmd>lua require'hop'.hint_words()<CR>
+" nnoremap f <cmd>lua require'hop'.hint_words()<CR>
 " nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 " nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 tnoremap <Esc> <C-\><C-n>
@@ -71,7 +64,7 @@ noremap <Leader>t :Neotree reveal=true toggle<CR>
 noremap <Leader>e :Neotree reveal=true toggle<CR>
 
 " nnoremap <Leader>vi :e $MYVIMRC<CR> 
-nnoremap <Leader>r :source $MYVIMRC<CR> 
+nnoremap <Leader>r <cmd>lua dotfile(vim.env.MYVIMRC)<CR> 
 
 " function! ToggleNerdTree() abort
 "   let isOpen = get(g:, 'NERDTree.IsOpen', 0)
@@ -147,5 +140,24 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 let g:ctrlsf_default_root = 'project'
 
 command! Gcommit Git<space>commit
+
+" autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()
+
+" command! Firework lua require("../zac/firework").expand()
+
+" nnoremap <silent> <leader>z :<c-u>lua require('../zac/firework').expand("n")<CR>
+" xnoremap <silent> <leader>z :<c-u>lua require("../zac/firework").expand("v")<CR>
+" autocmd User PackerCompileDone echom "compile finish"
 ]]
+)
+
+map(
+  {"n", "v"},
+  "<Enter>",
+  function()
+    require("../zac/firework").expand()
+  end,
+  {
+    desc = "to run firework"
+  }
 )

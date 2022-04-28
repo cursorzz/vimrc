@@ -1,6 +1,7 @@
 local actions = require("telescope.actions")
 -- local action_state = require("telescope.actions.state")
 local fb_actions = require("telescope").extensions.file_browser.actions
+local map = vim.keymap.set
 -- print(vim.inspect(fb_actions))
 local M = {}
 local default_theme =
@@ -133,5 +134,30 @@ end
 M.buffers = function()
   require "telescope.builtin".buffers({previewer = false, show_all_buffers = true})
 end
+
+
+map(
+  "n",
+  "<C-f>",
+  function()
+    return M.git_files()
+  end
+)
+
+map(
+  "n",
+  "<C-g>",
+  function()
+    require "telescope".extensions.file_browser.file_browser()
+  end
+)
+
+map(
+  "n",
+  "<C-b>",
+  function()
+    M.buffers()
+  end
+)
 
 return M

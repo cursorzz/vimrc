@@ -1,12 +1,15 @@
 function _G.put(...)
-  local objects = {init}
-  for i = 1, select("#", ...) do
-    local v = select(i, ...)
-    table.insert(objects, vim.inspect(v))
-  end
-
-  print(table.concat(objects, " "))
-  return ...
+  vim.pretty_print(...)
+  -- local objects = vim.tbl_map(vim.inspect, {...})
+  -- print(unpack(objects))
+  -- local objects = {init}
+  -- for i = 1, select("#", ...) do
+  --   local v = select(i, ...)
+  --   table.insert(objects, vim.inspect(v))
+  -- end
+  --
+  -- print(table.concat(objects, " "))
+  -- return ...
 end
 
 local exec = require("zac.firework.utils").exec
@@ -61,8 +64,9 @@ end
 
 -- [(s)]
 
-function M.expand(mode)
-  M.mode = mode
+function M.expand()
+  local mode = vim.fn.mode()
+  put("this is mode sssss ", mode)
   local shortest = nil
   local selection = M.get_current_visual_selection()
   if selection == nil then
@@ -72,7 +76,7 @@ function M.expand(mode)
   for _, v in ipairs(M.candidates) do
     local result = M.get_best_match(selection, v)
     if result ~= nil then
-        put(result)
+      put(result)
       -- if result.length > selection.length
       if shortest == nil then
         shortest = result
@@ -84,12 +88,14 @@ function M.expand(mode)
       end
     end
   end
+
+  put(shortest)
   if shortest ~= nil then
     -- put(shortest)
     update_selection(shortest)
   else
     -- put("sdfdsf", selection, )
-    if M.mode == "v" then
+    if mode == "v" then
       update_selection(selection)
     end
   end
@@ -161,6 +167,8 @@ function M.get_current_visual_selection()
   end
   return M.get_visual_selection(text_object)
 end
+
+-- parameters variable_list string bracket_index_expression>field table_constructor
 
 function M.get_cursor_position()
   local pos = vim.api.nvim_win_get_cursor(0)

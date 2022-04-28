@@ -1,9 +1,10 @@
-vim.cmd([[
-syntax on                   " 开启语法高亮功能 允许用指定语法高亮配色方案替换默认方案
-filetype plugin indent on   " 为特定文件类型载入相应缩进配置
-filetype on                 " 为特定文件类型载入相应文件类型插件
+vim.cmd(
+  [[
+" syntax on                   " 开启语法高亮功能 允许用指定语法高亮配色方案替换默认方案
+" filetype plugin indent on   " 为特定文件类型载入相应缩进配置
+" filetype on                 " 为特定文件类型载入相应文件类型插件
 set showmatch               " 显示匹配括号
-set autochdir               " 自动切换当前目录为当前文件所在的目录  
+" set autochdir               " 自动切换当前目录为当前文件所在的目录  
 set autowrite               " 自动保存
 " set confirm                 " 在处理未保存或只读文件的时候，弹出确认
 set nobackup                " 从不备份  
@@ -44,8 +45,8 @@ set smartindent             " 智能对齐
 " set mouse=a                 " 鼠标可定位
 " set selection=exclusive
 " set selectmode=mouse,key
-set gcr=a:block-blinkon0    " 禁止光标闪烁
-set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+" set gcr=a:block-blinkon0    " 禁止光标闪烁
+" set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 """""""""""
 set clipboard+=unnamedplus  " 始终使用系统剪切板
@@ -73,4 +74,8 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
-]])
+]]
+)
+
+vim.o.updatetime = 250
+vim.g.laststatus = 3

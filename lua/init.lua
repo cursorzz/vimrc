@@ -10,6 +10,8 @@ require("zac.null-ls")
 require("zac.lsp")
 require("zac.compe")
 require("zac.telescope")
+require("zac.neogit")
+require("zac.hop")
 
 require("gitsigns").setup()
 -- require("colorizer").setup(
@@ -72,10 +74,24 @@ require("nvim_comment").setup(
   }
 )
 
-require("neo-tree").setup({
-  enable_git_status = false
-
-})
+require("neo-tree").setup(
+  {
+    close_if_last_window = true,
+    enable_git_status = false,
+    enable_diagnostics = false,
+    filesystem = {
+      follow_current_file = true,
+      window = {
+        mappings = {
+          ["-"] = "navigate_up"
+        }
+      }
+    },
+    window = {
+      width = 30
+    }
+  }
+)
 
 -- require("nvim-tree").setup {
 --   -- update_to_buf_dir = {
@@ -116,3 +132,26 @@ require("indent_blankline").setup {
   char = "|",
   buftype_exclude = {"terminal"}
 }
+
+-- local user_group = vim.api.nvim_create_augroup("User", {clear = false})
+--
+
+function ReloadConfig(package_name)
+  for name, _ in pairs(package.loaded) do
+    if name:match("^" .. package_name) then
+      package.loaded[name] = nil
+    end
+  end
+
+  dofile(vim.env.MYVIMRC)
+
+  print(package_name .. " reloaded!")
+end
+
+vim.keymap.set(
+  "n",
+  "<leader>l",
+  function()
+    ReloadConfig("firework")
+  end
+)

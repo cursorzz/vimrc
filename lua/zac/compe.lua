@@ -8,13 +8,15 @@ cmp.setup(
         vim.fn["vsnip#anonymous"](args.body)
       end
     },
-    mapping = {
-      ["<C-j>"] = cmp.mapping.select_next_item(),
-      ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<ESC>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm({select = true})
-    },
+    mapping = cmp.mapping.preset.insert(
+      {
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<ESC>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({select = true})
+      }
+    ),
     sources = {
       {name = "nvim_lsp"},
       {name = "vsnip"},

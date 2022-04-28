@@ -1,3 +1,38 @@
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap =
+    fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+end
+
+
+-- related autocmd
+vim.api.nvim_create_autocmd(
+  "User",
+  {
+    pattern = "PackerComplete",
+    callback = function(a)
+      print(vim.inspect(a))
+      print("packer task done")
+    end
+    -- group = 'User',
+    -- pattern = "*"
+  }
+)
+
+vim.api.nvim_create_autocmd(
+  "User",
+  {
+    pattern = "PackerCompileDone",
+    callback = function(a)
+      print(vim.inspect(a))
+      print("packer compile finish")
+    end
+    -- group = 'User',
+    -- pattern = "*"
+  }
+)
+
 return require("packer").startup(
   function(use)
     use "wbthomason/packer.nvim"
@@ -16,7 +51,8 @@ return require("packer").startup(
     use "ojroques/vim-oscyank"
     --  https://github.com/lewis6991/gitsigns.nvim
     use "lewis6991/gitsigns.nvim"
-    -- use "TimUntersberger/neogit"
+
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
     -- [Tab completion]
     use {"hrsh7th/cmp-buffer", requires = {"hrsh7th/nvim-cmp"}}
@@ -29,7 +65,7 @@ return require("packer").startup(
     use "terrortylor/nvim-comment" --, {'branch' : 'main'}
     use "JoosepAlviste/nvim-ts-context-commentstring" --, {'branch' : 'main'}
 
-    use "phaazon/hop.nvim"
+    use {"phaazon/hop.nvim"}
     use "kyazdani42/nvim-web-devicons"
     use "tpope/vim-fugitive"
 
@@ -83,5 +119,30 @@ return require("packer").startup(
       end
     }
     use "elihunter173/dirbuf.nvim"
+
+    use {
+      "lewis6991/impatient.nvim",
+      config = function()
+        require("impatient")
+      end
+    }
+
+    -- 弃用, 一旦出现错误会打乱原先的布局, 不能忍
+    use(
+      {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+          require("lsp_lines").register_lsp_virtual_lines()
+        end,
+        disable = true
+      }
+    )
+
+    use "kdheepak/lazygit.nvim"
+
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end
 )
+
