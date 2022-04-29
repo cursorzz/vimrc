@@ -1,10 +1,8 @@
-require("hop").setup()
---   print("greate", ok)
--- if ok then
---   print("greate")
---   module.setup({})
--- end
-local map = vim.keymap.set
+local ok, module = pcall(require, "hop")
+if ok then
+  module.setup()
+  local map = vim.keymap.set
 
-map("n", "f", ":HopChar1<CR>"
-)
+  map("n", "f", ":HopChar1<CR>", {silent= true}
+  )
+end
