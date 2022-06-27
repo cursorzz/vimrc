@@ -32,6 +32,8 @@ require "telescope".setup {
     },
     file_browser = {
       previewer = false,
+        path = "%:p:h",
+        -- cwd = "%:p:h"
       -- initial_mode = "normal",
       theme = "dropdown",
       mappings = {
@@ -40,7 +42,7 @@ require "telescope".setup {
           ["<c-k>"] = actions.move_selection_previous,
           ["<c-h>"] = fb_actions.goto_parent_dir,
           ["<c-l>"] = actions.select_default,
-          ["<c-a>"] = fb_actions.create,
+          ["<c-n>"] = fb_actions.create,
           ["<C-x>"] = actions.select_horizontal,
           ["<C-v>"] = actions.select_vertical,
           ["<C-t>"] = actions.select_tab,
@@ -134,7 +136,6 @@ end
 M.buffers = function()
   require "telescope.builtin".buffers({previewer = false, show_all_buffers = true})
 end
-
 
 map(
   "n",

@@ -25,14 +25,6 @@ vim.diagnostic.config(
   }
 )
 
-require "lspconfig/configs".emmet_ls = {
-  default_config = {
-    cmd = {"emmet-ls", "--stdio"},
-    filetypes = {"html", "css"},
-    root_dir = require "lspconfig".util.root_pattern(".git", vim.fn.getcwd())
-  }
-}
-
 local on_attach = function(client)
   if client.resolved_capabilities.document_formatting then
     vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()")
@@ -76,6 +68,12 @@ lsp_installer.on_server_ready(
         )
       end
     }
+
+    if server.name == "emmet_ls" then
+      opts.settings = {
+        filetypes = {"html", "css", "vue"}
+      }
+    end
 
     if server.name == "sumneko_lua" then
       opts.settings = {
