@@ -48,7 +48,9 @@ return require("packer").startup(
     -- [Utils]
     -- betner replace content, visual mode \"gr\" will replace copied content
     use "vim-scripts/ReplaceWithRegister"
-    use "ojroques/vim-oscyank"
+
+    use 'ojroques/nvim-osc52'
+
     --  https://github.com/lewis6991/gitsigns.nvim
     use "lewis6991/gitsigns.nvim"
 
@@ -90,6 +92,7 @@ return require("packer").startup(
 
     use "dyng/ctrlsf.vim"
 
+    use 'samoshkin/vim-mergetool'
     -- tree like file browser
     --
     -- use "kyazdani42/nvim-tree.lua"
@@ -138,7 +141,12 @@ return require("packer").startup(
       }
     )
 
+    use "EdenEast/nightfox.nvim"
+
     use "kdheepak/lazygit.nvim"
+
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+
 
     if packer_bootstrap then
       require("packer").sync()
