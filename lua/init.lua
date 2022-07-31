@@ -13,6 +13,8 @@ require("zac.telescope")
 require("zac.neogit")
 require("zac.hop")
 
+require("osc52").setup()
+
 require("gitsigns").setup()
 -- require("colorizer").setup(
 --   {
@@ -155,3 +157,7 @@ vim.keymap.set(
     ReloadConfig("firework")
   end
 )
+
+require("neogit").setup({
+  kind = "split_above"
+})

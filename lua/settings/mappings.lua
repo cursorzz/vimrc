@@ -13,6 +13,7 @@ let g:tokyonight_style = "night"
 let g:tokyonight_dark_sidebar = "true"
 " colorscheme gruvbox
 colorscheme tokyonight
+" colorscheme minimal-base16
 " colorscheme aurora
 " colorscheme iceberg
 " colorscheme base16-schemer-dark
@@ -35,11 +36,6 @@ tnoremap hh <ESC>
 " noremap <leader>0 :tablast<cr>
 
 :vmap u <Nop>
-
-" universal yank 
-vnoremap <leader>c :OSCYank<CR>
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
-
 
 nnoremap <Leader>d :DiffviewOpen<CR>
 
@@ -114,7 +110,7 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 " autocmd BufWritePre *.vue PrettierAsync()
 " autocmd BufWritePre *.js PrettierAsync()
 
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
+" autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
 let g:prettier#autoformat_require_pragma = 0
 
 if exists('$TMUX')
@@ -139,7 +135,7 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 
 let g:ctrlsf_default_root = 'project'
 
-command! Gcommit Git<space>commit
+command! Gcommit Neogit<space>commit
 
 " autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()
 
@@ -161,3 +157,7 @@ map(
     desc = "to run firework"
   }
 )
+
+map('n', '<leader>c', require('osc52').copy_operator, {expr = true})
+map('x', '<leader>c', require('osc52').copy_visual)
+-- autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif

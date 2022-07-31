@@ -109,18 +109,21 @@ return require("packer").startup(
     -- use "Tastyep/structlog.nvim" --, {'branch': 'main'}
     use "lukas-reineke/indent-blankline.nvim" --, {'branch': 'master'}
 
+    use 'Yazeed1s/minimal.nvim'
+
+
     -- use "folke/zen-mode.nvim" --, {'branch': 'main'}
 
     -- use "casonadams/walh" --, {'branch': 'main'}
-    use {
-      "echasnovski/mini.nvim",
-      branch = "stable",
-      config = function()
-        require("mini.statusline").setup({})
-        -- require("mini.pairs").setup({})
-        -- require("mini.tabline").setup({})
-      end
-    }
+    -- use {
+    --   "echasnovski/mini.nvim",
+    --   branch = "stable",
+    --   config = function()
+    --     require("mini.statusline").setup({})
+    --     -- require("mini.pairs").setup({})
+    --     -- require("mini.tabline").setup({})
+    --   end
+    -- }
     use "elihunter173/dirbuf.nvim"
 
     use {
