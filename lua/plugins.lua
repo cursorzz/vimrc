@@ -5,7 +5,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
 end
 
-
 -- related autocmd
 vim.api.nvim_create_autocmd(
   "User",
@@ -54,7 +53,7 @@ return require("packer").startup(
     --  https://github.com/lewis6991/gitsigns.nvim
     use "lewis6991/gitsigns.nvim"
 
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
 
     -- [Tab completion]
     use {"hrsh7th/cmp-buffer", requires = {"hrsh7th/nvim-cmp"}}
@@ -87,8 +86,6 @@ return require("packer").startup(
     use "nvim-treesitter/playground"
 
     use "jose-elias-alvarez/null-ls.nvim" --, {'branch': 'main'}
-    use "joukevandermaas/vim-ember-hbs"
-    use "kchmck/vim-coffee-script"
 
     use "dyng/ctrlsf.vim"
 
@@ -108,9 +105,6 @@ return require("packer").startup(
 
     -- use "Tastyep/structlog.nvim" --, {'branch': 'main'}
     use "lukas-reineke/indent-blankline.nvim" --, {'branch': 'master'}
-
-    use 'Yazeed1s/minimal.nvim'
-
 
     -- use "folke/zen-mode.nvim" --, {'branch': 'main'}
 
@@ -134,26 +128,42 @@ return require("packer").startup(
     }
 
     -- 弃用, 一旦出现错误会打乱原先的布局, 不能忍
+    -- use(
+    --   {
+    --     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    --     config = function()
+    --       require("lsp_lines").register_lsp_virtual_lines()
+    --     end,
+    --     disable = true
+    --   }
+    -- )
+    -- use {
+    --   "nvim-orgmode/orgmode",
+    --   config = function()
+    --     require("orgmode").setup {}
+    --   end
+    -- }
+
+    use "renerocksai/telekasten.nvim"
+
     use(
       {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        config = function()
-          require("lsp_lines").register_lsp_virtual_lines()
-        end,
-        disable = true
+        "iamcco/markdown-preview.nvim",
+        run = function()
+          vim.fn["mkdp#util#install"]()
+        end
       }
     )
 
-    use "EdenEast/nightfox.nvim"
-
     use "kdheepak/lazygit.nvim"
 
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-
+    if vim.fn.has("linux") then
+      use "joukevandermaas/vim-ember-hbs"
+      use "kchmck/vim-coffee-script"
+    end
 
     if packer_bootstrap then
       require("packer").sync()
     end
   end
 )
-

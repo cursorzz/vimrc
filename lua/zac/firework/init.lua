@@ -36,6 +36,7 @@ local function update_selection(range)
 
   local buf = vim.api.nvim_get_current_buf()
 
+  -- vim.cmd("sil! norm! <ESC>v<ESC>v")
   vim.fn.setpos(".", {buf, start_row, start_col, 0})
   local mode_string = vim.api.nvim_replace_termcodes("v", true, true, true)
   vim.cmd("normal! " .. mode_string)
@@ -63,6 +64,169 @@ function get_selection_length(start_pos, end_pos)
 end
 
 -- [(s)]
+--
+function M.expand_v2()
+  local mode = vim.fn.mode()
+
+  local matches = {{'"', '"'}, {"'", "'"}, {"(", ")"}, {"[", "]"}, {"{", "}"}}
+
+  local origin_node = ts.get_node_at_cursor()
+
+  local found = false
+  local matched = nil
+  local matched_pair = nil
+  local node = nil
+
+  if mode == "v" then
+    node = origin_node
+
+    put("=========================")
+
+    while node:type() ~= "chunk" and not found do
+      if node:id() ~= origin_node:id() and not node_equal(node, origin_node) then
+        local node_start, node_end = get_node_type(node)
+        for _, pair in ipairs(matches) do
+          local start_symbol, end_symbol = unpack(pair)
+
+          if node_start == start_symbol and node_end == end_symbol then
+            found = true
+            matched_pair = pair
+            matched = node
+            break
+          end
+        end
+      end
+      node = node:parent()
+    end
+  else
+    node = origin_node
+    while node:type() ~= "chunk" and not found do
+      -- if node:id() ~= origin_node:id() then
+      local node_start, node_end = get_node_type(node)
+      put("checking node ", node:type(), node:named(), get_node_content(node))
+      for _, pair in ipairs(matches) do
+        local start_symbol, end_symbol = unpack(pair)
+
+        if node_start == start_symbol and node_end == end_symbol then
+          put("found match ", pair)
+          found = true
+          matched_pair = pair
+          matched = node
+          break
+        end
+      end
+      -- end
+      node = node:parent()
+    end
+  end
+
+  -- put(get)
+
+  if matched ~= nil then
+    if mode == "v" then
+      put("in visual", get_node_content(matched))
+      exec("normal! <Esc>")
+      update_selection(node_to_range(matched))
+    else
+      update_selection(get_node_inner(matched, matched_pair))
+    end
+  -- put(get_node_content(matched))
+  end
+end
+
+function handle_special_case_for_bracket()
+end
+
+function get_node_content(node)
+  local start_row, start_col, end_row, end_col = node:range()
+  -- put("node is ", node:type(), node:named())
+  local buf = vim.api.nvim_get_current_buf()
+  return vim.api.nvim_buf_get_text(buf, start_row, start_col, end_row, end_col, {})
+end
+
+function get_node_type(node)
+  local start_row, start_col, end_row, end_col = node:range()
+  -- put("node is ", node:type(), node:named())
+  local buf = vim.api.nvim_get_current_buf()
+  local content = vim.api.nvim_buf_get_text(buf, start_row, start_col, end_row, end_col, {})
+  -- put("content is", content)
+  local last_line = content[#content]
+  return string.sub(content[1], 1, 1), string.sub(last_line, #last_line, #last_line)
+end
+
+function get_node_inner(node, matched_pair)
+  -- TODO 可以利用到 node
+  local total = node:named_child_count()
+  local start_row, start_col, _ = node:named_child(0):start()
+  local end_row, end_col, _ = node:named_child(total - 1):end_()
+
+  return Range:new(
+    {
+      start_pos = {start_row + 1, start_col + 1},
+      end_pos = {end_row + 1, end_col}
+    }
+  )
+  -- local start_symbol, end_symbol = unpack(matched_pair)
+  -- put("sdfdsf", start_symbol, end_symbol)
+  -- local start_row, start_col, end_row, end_col = node:range()
+  -- local contents = get_node_content(node)
+  -- if #contents == 1 then
+  --   -- just one line
+  --   --
+  --   local left_content = string.sub(contents[1], #start_symbol + 1, -(#end_symbol + 1))
+  --   if #left_content > 0 then
+  --     start_col = start_col + #start_symbol
+  --     end_col = end_col - #end_symbol
+  --   else
+  --     start_col = start_col + #start_symbol
+  --     end_col = start_col
+  --   end
+  -- else
+  --   if contents[1] == start_symbol then
+  --     start_row = start_row + 1
+  --     start_col = 0
+  --   end
+  --
+  --   if contents[#contents] == end_symbol then
+  --     end_row = end_row - 1
+  --     end_col = #contents[#contents - 1]
+  --   end
+  -- end
+  -- return Range:new(
+  --   {
+  --     start_pos = {start_row + 1, start_col + 1},
+  --     end_pos = {end_row + 1, end_col}
+  --   }
+  -- )
+end
+
+
+
+function node_equal(nodeA, nodeB)
+  local a_s_row, a_s_col, a_e_row, a_e_col = nodeA:range()
+  local b_s_row, b_s_col, b_e_row, b_e_col = nodeB:range()
+
+  return a_s_row == b_s_row and a_s_col == b_s_col and a_e_row == b_e_row and a_e_col and b_e_col
+end
+
+function get_node_content(node)
+  put(node:range())
+  local start_row, start_col, end_row, end_col = node:range()
+
+  local buf = vim.api.nvim_get_current_buf()
+  return vim.api.nvim_buf_get_text(buf, start_row, start_col, end_row, end_col, {})
+end
+
+function node_to_range(node)
+  local start_row, start_col, end_row, end_col = node:range()
+  put("range is ", node:range())
+  return Range:new(
+    {
+      start_pos = {start_row + 1, start_col + 1},
+      end_pos = {end_row + 1, end_col}
+    }
+  )
+end
 
 function M.expand()
   local mode = vim.fn.mode()
@@ -192,16 +356,6 @@ function M.get_visual_selection()
   )
 
   return range
-end
-
-function node_to_range(node)
-  local start_row, start_col, end_row, end_col = node:range()
-  return Range:new(
-    {
-      start_pos = {start_row, start_col},
-      end_pos = {end_row, end_col}
-    }
-  )
 end
 
 function M._get_selected_node(range)

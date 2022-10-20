@@ -1,3 +1,4 @@
+-- require('orgmode').setup_ts_grammar()
 require "nvim-treesitter.configs".setup {
   ensure_installed = {"go", "lua", "ruby", "javascript", "vue", "html", "css", "vim"}, -- one of "all", "language", or a list of language
   highlight = {

@@ -146,6 +146,7 @@ command! Gcommit Neogit<space>commit
 " autocmd User PackerCompileDone echom "compile finish"
 ]]
 )
+map("n", "<Leader>s", "<Plug>CtrlSFCwordExec")
 
 map(
   {"n", "v"},

@@ -79,3 +79,7 @@ set shortmess+=c
 
 vim.o.updatetime = 250
 vim.g.laststatus = 3
+
+-- use new filetype checker, which should be faster
+-- vim.g.do_filetype_lua = 1
+-- vim.g.did_load_filetypes = 0

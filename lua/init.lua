@@ -119,7 +119,7 @@ require("neo-tree").setup(
 --   files = 1, -- or 0,
 --   folder_arrows = 1 -- or 0
 -- }
--- vim.g.nvim_tree_git_hl = 0
+-- vim.g.nvim_tree_git_hl = 0tai
 
 -- vim.g.nvim_tree_git_hl = 0
 -- vim.g.nvim_tree_gitignore = 0
@@ -158,6 +158,11 @@ vim.keymap.set(
   end
 )
 
-require("neogit").setup({
-  kind = "split_above"
-})
+local home = vim.fn.expand("~/zettelkasten")
+require("telekasten").setup(
+  {
+    home = home
+  }
+)
+
+vim.keymap.set("n", "<leader>n", require("telekasten").panel, {silent = true})
