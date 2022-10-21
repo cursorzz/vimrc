@@ -43,49 +43,49 @@ local function ensure_servers_installed()
   end
 end
 
-lsp_installer.on_server_ready(
-  function(server)
-    ensure_servers_installed()
-    local opts = {
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        local no_formattings = {"tsserver", "jsonls", "volar"}
-        for _, f in pairs(no_formattings) do
-          if server.name == f then
-            client.server_capabilities.document_formatting = false
-          end
-        end
-
-        -- if client.server_capabilities.colorProvider then
-        --   require("lsp/colorizer").buf_attach(bufnr, {single_column = false, debounce = 500})
-        -- end
-
-        on_attach(client)
-        require("lsp_signature").on_attach(
-          {
-            hint_enable = false
-          }
-        )
-      end
-    }
-
-    if server.name == "emmet_ls" then
-      opts.settings = {
-        filetypes = {"html", "css", "vue"}
-      }
-    end
-
-    if server.name == "sumneko_lua" then
-      opts.settings = {
-        Lua = {
-          workspace = {
-            maxPreload = 10000, -- Add this if missing or increase it
-            preloadFileSize = 10000, -- Add this if missing or increase it
-            checkThirdParty = false
-          }
-        }
-      }
-    end
-    server:setup(opts)
-  end
-)
+-- lsp_installer.on_server_ready(
+--   function(server)
+--     ensure_servers_installed()
+--     local opts = {
+--       capabilities = capabilities,
+--       on_attach = function(client, bufnr)
+--         local no_formattings = {"tsserver", "jsonls", "volar"}
+--         for _, f in pairs(no_formattings) do
+--           if server.name == f then
+--             client.server_capabilities.document_formatting = false
+--           end
+--         end
+--
+--         -- if client.server_capabilities.colorProvider then
+--         --   require("lsp/colorizer").buf_attach(bufnr, {single_column = false, debounce = 500})
+--         -- end
+--
+--         on_attach(client)
+--         require("lsp_signature").on_attach(
+--           {
+--             hint_enable = false
+--           }
+--         )
+--       end
+--     }
+--
+--     if server.name == "emmet_ls" then
+--       opts.settings = {
+--         filetypes = {"html", "css", "vue"}
+--       }
+--     end
+--
+--     if server.name == "sumneko_lua" then
+--       opts.settings = {
+--         Lua = {
+--           workspace = {
+--             maxPreload = 10000, -- Add this if missing or increase it
+--             preloadFileSize = 10000, -- Add this if missing or increase it
+--             checkThirdParty = false
+--           }
+--         }
+--       }
+--     end
+--     server:setup(opts)
+--   end
+-- )

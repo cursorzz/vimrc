@@ -73,8 +73,7 @@ return require("packer").startup(
     use "wakatime/vim-wakatime"
     use "tjdevries/nlua.nvim"
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-    use "neovim/nvim-lspconfig"
-    use "williamboman/nvim-lsp-installer" -- , { 'branch': 'main'}
+    -- use "williamboman/nvim-lsp-installer" -- , { 'branch': 'main'}
     use "nvim-lua/telescope.nvim"
     use "nvim-telescope/telescope-fzy-native.nvim"
     use "nvim-telescope/telescope-file-browser.nvim"
@@ -155,7 +154,11 @@ return require("packer").startup(
       }
     )
 
-    use { "williamboman/mason.nvim" }
+    use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+}
 
 
     use "kdheepak/lazygit.nvim"

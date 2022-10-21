@@ -2,16 +2,24 @@
 -- which makes startup and save extremly slow, see this
 -- https://github.com/kyazdani42/nvim-tree.lua/issues/453
 --
+vim.diagnostic.config(
+  {
+    virtual_text = false,
+    signs = true,
+    float = { border = "single" }
+  }
+)
 require("settings/options")
 require("settings/mappings")
 
 require("zac.treesitter")
 require("zac.null-ls")
-require("zac.lsp")
+-- require("zac.lsp")
 require("zac.compe")
 require("zac.telescope")
 require("zac.neogit")
-require("zac.hop")
+-- require("zac.hop")
+require("zac.mason")
 
 require("osc52").setup()
 
@@ -132,7 +140,7 @@ require("neo-tree").setup(
 
 require("indent_blankline").setup {
   char = "|",
-  buftype_exclude = {"terminal"}
+  buftype_exclude = { "terminal" }
 }
 
 -- local user_group = vim.api.nvim_create_augroup("User", {clear = false})
@@ -165,4 +173,4 @@ require("telekasten").setup(
   }
 )
 
-vim.keymap.set("n", "<leader>n", require("telekasten").panel, {silent = true})
+vim.keymap.set("n", "<leader>n", require("telekasten").panel, { silent = true })
