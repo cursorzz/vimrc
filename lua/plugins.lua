@@ -155,6 +155,9 @@ return require("packer").startup(
       }
     )
 
+    use { "williamboman/mason.nvim" }
+
+
     use "kdheepak/lazygit.nvim"
 
     if vim.fn.has("linux") then
