@@ -2,7 +2,7 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap =
-  fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
 end
 
 -- related autocmd
@@ -53,26 +53,27 @@ return require("packer").startup(
     --  https://github.com/lewis6991/gitsigns.nvim
     use "lewis6991/gitsigns.nvim"
 
-    use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
+    use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
 
     -- [Tab completion]
-    use { "hrsh7th/cmp-buffer", requires = { "hrsh7th/nvim-cmp" } }
-    use { "hrsh7th/cmp-path", requires = { "hrsh7th/nvim-cmp" } }
-    use { "hrsh7th/cmp-vsnip", requires = { "hrsh7th/nvim-cmp", "hrsh7th/vim-vsnip", "hrsh7th/vim-vsnip-integ" } }
-    use { "hrsh7th/cmp-nvim-lsp", requires = { "hrsh7th/nvim-cmp" } }
+    use {"hrsh7th/cmp-buffer", requires = {"hrsh7th/nvim-cmp"}}
+    use {"hrsh7th/cmp-path", requires = {"hrsh7th/nvim-cmp"}}
+    use {"hrsh7th/cmp-vsnip", requires = {"hrsh7th/nvim-cmp", "hrsh7th/vim-vsnip", "hrsh7th/vim-vsnip-integ"}}
+    use {"hrsh7th/cmp-nvim-lsp", requires = {"hrsh7th/nvim-cmp"}}
+    use {"hrsh7th/cmp-nvim-lua", requires = {"hrsh7th/nvim-cmp"}}
 
     use "rafamadriz/friendly-snippets" --, { 'branch': 'main'}
 
     use "terrortylor/nvim-comment" --, {'branch' : 'main'}
     use "JoosepAlviste/nvim-ts-context-commentstring" --, {'branch' : 'main'}
 
-    use { "phaazon/hop.nvim" }
+    use {"phaazon/hop.nvim"}
     use "kyazdani42/nvim-web-devicons"
     use "tpope/vim-fugitive"
 
     use "wakatime/vim-wakatime"
     use "tjdevries/nlua.nvim"
-    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     -- use "williamboman/nvim-lsp-installer" -- , { 'branch': 'main'}
     use "nvim-lua/telescope.nvim"
     use "nvim-telescope/telescope-fzy-native.nvim"
@@ -117,7 +118,7 @@ return require("packer").startup(
     --     -- require("mini.tabline").setup({})
     --   end
     -- }
-    use "elihunter173/dirbuf.nvim"
+    -- use "elihunter173/dirbuf.nvim"
 
     use {
       "lewis6991/impatient.nvim",
@@ -167,7 +168,7 @@ return require("packer").startup(
       use "kchmck/vim-coffee-script"
     end
 
-    use { "ibhagwan/smartyank.nvim" }
+    use {"ibhagwan/smartyank.nvim"}
 
     if packer_bootstrap then
       require("packer").sync()

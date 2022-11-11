@@ -1,4 +1,4 @@
--- load packer plugins 
+-- load packer plugins
 require("plugins")
 
 -- load user defined settings

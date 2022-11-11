@@ -13,13 +13,14 @@ require("settings/options")
 require("settings/mappings")
 
 require("zac.treesitter")
-require("zac.null-ls")
 -- require("zac.lsp")
 require("zac.compe")
+require("zac.cmpe")
 require("zac.telescope")
 require("zac.neogit")
 -- require("zac.hop")
 require("zac.mason")
+require("zac.null-ls")
 
 require("osc52").setup()
 

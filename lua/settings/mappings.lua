@@ -82,15 +82,13 @@ let g:easyescape_timeout = 100
 
 let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
 
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> E <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+" nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> E <cmd>lua vim..diagnostic.show_line_diagnostics()<CR>
+" nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 
 " inoremap <silent><expr> <C-Space> compe#complete()
@@ -149,7 +147,7 @@ command! Gcommit Neogit<space>commit
 map("n", "<Leader>s", "<Plug>CtrlSFCwordExec")
 
 map(
-  {"n", "v"},
+  { "n", "v" },
   "<Enter>",
   function()
     require("../zac/firework").expand()
@@ -159,6 +157,6 @@ map(
   }
 )
 
-map('n', '<leader>c', require('osc52').copy_operator, {expr = true})
-map('x', '<leader>c', require('osc52').copy_visual)
+-- map('n', '<leader>c', require('osc52').copy_operator, {expr = true})
+-- map('x', '<leader>c', require('osc52').copy_visual)
 -- autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
