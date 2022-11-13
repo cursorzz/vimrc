@@ -14,12 +14,18 @@ cmp.setup(
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<ESC>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({select = true})
+        ["<CR>"] = cmp.mapping.confirm({ select = true })
       }
     ),
     sources = {
-      {name = "nvim_lsp"},
-      {name = "vsnip"},
+      { name = "nvim_lsp" },
+      { name = "vsnip" },
+      {
+        name = "zac"
+        -- option = {
+        --   keyword_length = 0
+        -- }
+      },
       {
         name = "buffer",
         option = {
@@ -28,7 +34,7 @@ cmp.setup(
           end
         }
       },
-      {name = "path"}
+      { name = "path" }
     }
   }
 )

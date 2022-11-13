@@ -56,8 +56,15 @@ tnoremap <Esc> <C-\><C-n>
 
 
 " NERDTree config
+" Git 相关的命令
 noremap <Leader>t :Neotree reveal=true toggle<CR>
 noremap <Leader>e :Neotree reveal=true toggle<CR>
+command! G :LazyGitCurrentFile
+command! Gw :Gitsigns stage_buffer
+command! Gr :Gitsigns reset_buffer
+command! Gd :Gitsigns diffthis
+" command! Gcommit Neogit<space>commit
+
 
 " nnoremap <Leader>vi :e $MYVIMRC<CR> 
 nnoremap <Leader>r <cmd>lua dotfile(vim.env.MYVIMRC)<CR> 
@@ -133,7 +140,7 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 
 let g:ctrlsf_default_root = 'project'
 
-command! Gcommit Neogit<space>commit
+" command! Gcommit Neogit<space>commit
 
 " autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync()
 
@@ -147,7 +154,7 @@ command! Gcommit Neogit<space>commit
 map("n", "<Leader>s", "<Plug>CtrlSFCwordExec")
 
 map(
-  { "n", "v" },
+  {"n", "v"},
   "<Enter>",
   function()
     require("../zac/firework").expand()
