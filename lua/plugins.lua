@@ -90,6 +90,8 @@ return require("packer").startup(
     use "dyng/ctrlsf.vim"
 
     use "samoshkin/vim-mergetool"
+
+    use "folke/neodev.nvim"
     -- tree like file browser
     --
     -- use "kyazdani42/nvim-tree.lua"
@@ -169,6 +171,27 @@ return require("packer").startup(
     end
 
     use {"ibhagwan/smartyank.nvim"}
+
+    use(
+      {
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        config = function()
+          require("lspsaga").setup(
+            {
+              lightbulb = {
+                enable = false,
+                enable_in_insert = false
+              },
+              symbol_in_winbar = {
+                enable = false
+              }
+            }
+          )
+        end,
+        requires = {{"nvim-tree/nvim-web-devicons"}}
+      }
+    )
 
     if packer_bootstrap then
       require("packer").sync()

@@ -20,7 +20,8 @@ local lua_fmt =
 --
 local sources = {
   ls.builtins.formatting.prettierd.with({filetypes = {"javascript", "json", "html", "typescript", "vue"}}),
-  lua_fmt
+  lua_fmt,
+  ls.builtins.formatting.gofmt
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -29,7 +30,7 @@ require("null-ls").setup(
   {
     on_attach = function(client, bufnr)
       if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
         vim.api.nvim_create_autocmd(
           "BufWritePre",
           {
