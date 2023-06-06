@@ -57,9 +57,9 @@ tnoremap <Esc> <C-\><C-n>
 
 " NERDTree config
 " Git 相关的命令
-noremap <Leader>t :Neotree reveal=true toggle<CR>
-noremap <Leader>e :Neotree reveal=true toggle<CR>
-command! G :LazyGitCurrentFile
+" noremap <Leader>t :Neotree reveal=true toggle<CR>
+" noremap <Leader>e :Neotree reveal=true toggle<CR>
+" command! G :LazyGitCurrentFile
 command! Gw :Gitsigns stage_buffer
 command! Gr :Gitsigns reset_buffer
 command! Gd :Gitsigns diffthis
@@ -167,3 +167,4 @@ map(
 -- map('n', '<leader>c', require('osc52').copy_operator, {expr = true})
 -- map('x', '<leader>c', require('osc52').copy_visual)
 -- autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
+vim.keymap.set("n", "<leader>e", require("oil").open, {desc = "Open Oil directory"})

@@ -15,9 +15,9 @@ require("settings/mappings")
 require("zac.treesitter")
 -- require("zac.lsp")
 require("zac.compe")
-require("zac.cmpe")
+-- require("zac.cmpe")
 require("zac.telescope")
-require("zac.neogit")
+-- require("zac.neogit")
 -- require("zac.hop")
 require("zac.mason")
 require("zac.null-ls")
@@ -27,6 +27,26 @@ require("osc52").setup()
 require("gitsigns").setup()
 
 require("neodev").setup()
+
+function ReloadConfig(package_name)
+  for name, _ in pairs(package.loaded) do
+    if name:match("^" .. package_name) then
+      package.loaded[name] = nil
+    end
+  end
+
+  dofile(vim.env.MYVIMRC)
+
+  print(package_name .. " reloaded!")
+end
+
+vim.keymap.set(
+  "n",
+  "<leader>l",
+  function()
+    ReloadConfig("firework")
+  end
+)
 
 -- require("colorizer").setup(
 --   {
@@ -53,6 +73,11 @@ require("tmux").setup(
     }
   }
 )
+
+require("indent_blankline").setup {
+  char = "|",
+  buftype_exclude = {"terminal"}
+}
 
 -- require("lualine").setup {
 --  options = {section_separators = "", component_separators = "", theme = "wombat"},
@@ -88,24 +113,24 @@ require("nvim_comment").setup(
   }
 )
 
-require("neo-tree").setup(
-  {
-    close_if_last_window = true,
-    enable_git_status = false,
-    enable_diagnostics = false,
-    filesystem = {
-      follow_current_file = true,
-      window = {
-        mappings = {
-          ["-"] = "navigate_up"
-        }
-      }
-    },
-    window = {
-      width = 30
-    }
-  }
-)
+-- require("neo-tree").setup(
+--   {
+--     close_if_last_window = true,
+--     enable_git_status = false,
+--     enable_diagnostics = false,
+--     filesystem = {
+--       follow_current_file = true,
+--       window = {
+--         mappings = {
+--           ["-"] = "navigate_up"
+--         }
+--       }
+--     },
+--     window = {
+--       width = 30
+--     }
+--   }
+-- )
 
 -- require("nvim-tree").setup {
 --   -- update_to_buf_dir = {
@@ -142,39 +167,14 @@ require("neo-tree").setup(
 -- }
 -- }
 
-require("indent_blankline").setup {
-  char = "|",
-  buftype_exclude = {"terminal"}
-}
-
 -- local user_group = vim.api.nvim_create_augroup("User", {clear = false})
 --
 
-function ReloadConfig(package_name)
-  for name, _ in pairs(package.loaded) do
-    if name:match("^" .. package_name) then
-      package.loaded[name] = nil
-    end
-  end
-
-  dofile(vim.env.MYVIMRC)
-
-  print(package_name .. " reloaded!")
-end
-
-vim.keymap.set(
-  "n",
-  "<leader>l",
-  function()
-    ReloadConfig("firework")
-  end
-)
-
-local home = vim.fn.expand("~/zettelkasten")
-require("telekasten").setup(
-  {
-    home = home
-  }
-)
-
-vim.keymap.set("n", "<leader>n", require("telekasten").panel, {silent = true})
+-- local home = vim.fn.expand("~/zettelkasten")
+-- require("telekasten").setup(
+--   {
+--     home = home
+--   }
+-- )
+--
+-- vim.keymap.set("n", "<leader>n", require("telekasten").panel, {silent = true})

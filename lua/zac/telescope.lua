@@ -2,6 +2,7 @@ local actions = require("telescope.actions")
 -- local action_state = require("telescope.actions.state")
 local fb_actions = require("telescope").extensions.file_browser.actions
 local map = vim.keymap.set
+local uv = vim.loop
 -- print(vim.inspect(fb_actions))
 local M = {}
 local default_theme =
@@ -32,8 +33,8 @@ require "telescope".setup {
     },
     file_browser = {
       previewer = false,
-        path = "%:p:h",
-        -- cwd = "%:p:h"
+      path = "%:p:h",
+      -- cwd = "%:p:h"
       -- initial_mode = "normal",
       theme = "dropdown",
       mappings = {
@@ -55,7 +56,7 @@ require "telescope".setup {
 }
 
 require("telescope").load_extension("fzy_native")
-require("telescope").load_extension "file_browser"
+-- require("telescope").load_extension "file_browser"
 
 M.search_dotfiles = function()
   require("telescope.builtin").find_files(
@@ -84,14 +85,15 @@ M.find_files = function()
   require "telescope.builtin".find_files(
     require("telescope.themes").get_dropdown(
       {
-        previewer = false
+        previewer = false,
+        cwd = vim.fn.expand("%:p:h")
       }
     )
   )
 end
 
 M.grep_find = function()
-  result = vim.fn.expand("<cword>")
+  local result = vim.fn.expand("<cword>")
 
   if result == "" then
     result = vim.fn.input("Grep For >")
@@ -112,7 +114,7 @@ M.grep_find = function()
   }
 end
 
-M.git_files = function()
+local function _open_git_file()
   require "telescope.builtin".git_files(
     {
       previewer = false,
@@ -127,9 +129,29 @@ M.git_files = function()
             prompt = prompt
           }
         end
-        -- print(prompt:match("%s"))
       end
     }
+  )
+end
+
+M.git_files = function()
+  uv.spawn(
+    "git",
+    {
+      args = {
+        "rev-parse",
+        "--is-inside-work-tree"
+      },
+      cwd = uv.cwd(),
+      stdio = {nil, nil, nil}
+    },
+    function(code, signal)
+      if code == 0 then
+        vim.schedule(_open_git_file)
+      else
+        vim.schedule(M.find_files)
+      end
+    end
   )
 end
 
@@ -149,7 +171,8 @@ map(
   "n",
   "<C-g>",
   function()
-    require "telescope".extensions.file_browser.file_browser()
+    M.find_files()
+    -- require "telescope".extensions.file_browser.file_browser()
   end
 )
 
