@@ -9,12 +9,12 @@ require("lazy").setup(
         vim.cmd([[colorscheme tokyonight]])
       end
     },
-    {"nvimtools/none-ls.nvim"},
+    { "nvimtools/none-ls.nvim" },
     {
       "nvim-lua/telescope.nvim"
     },
-    {"nvim-tree/nvim-web-devicons", lazy = true},
-    {"ojroques/nvim-osc52"},
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+    { "ojroques/nvim-osc52" },
     {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -26,6 +26,20 @@ require("lazy").setup(
         "hrsh7th/vim-vsnip-integ",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua"
+      }
+    },
+    "aserowy/tmux.nvim",
+    {
+      "akinsho/git-conflict.nvim",
+      opts = {
+        default_mappings = {
+          ours = "o",
+          theirs = "t",
+          none = "0",
+          both = "b",
+          next = "n",
+          prev = "p"
+        }
       }
     },
     {
@@ -50,6 +64,24 @@ require("lazy").setup(
       end
     },
     -- [Tab completion]
+    --
+    {
+      "glepnir/lspsaga.nvim",
+      config = function()
+        require("lspsaga").setup(
+          {
+            lightbulb = {
+              enable = false,
+              enable_in_insert = false
+            },
+            symbol_in_winbar = {
+              enable = false
+            }
+          }
+        )
+      end,
+      dependencies = { "nvim-tree/nvim-web-devicons" }
+    },
 
     {
       "williamboman/mason.nvim",
@@ -62,7 +94,7 @@ require("lazy").setup(
     {
       "nvim-treesitter/nvim-treesitter",
       config = function()
-        vim.cmd([[TSUpdate]])
+        -- vim.cmd([[TSUpdate]])
       end
     },
     {
@@ -73,14 +105,16 @@ require("lazy").setup(
         "nvim-telescope/telescope-file-browser.nvim"
       }
     },
+
+    { "github/copilot.vim" },
     "tpope/vim-fugitive",
     {
       "stevearc/oil.nvim",
       config = function()
         require("oil").setup()
-        vim.keymap.set("n", "<leader>e", require("oil").open, {desc = "Open Oil directory"})
+        vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open Oil directory" })
       end,
-      dependencies = {"nvim-tree/nvim-web-devicons"}
+      dependencies = { "nvim-tree/nvim-web-devicons" }
     },
     {
       "lukas-reineke/indent-blankline.nvim",
@@ -103,7 +137,7 @@ vim.diagnostic.config(
   {
     virtual_text = false,
     signs = true,
-    float = {border = "single"}
+    float = { border = "single" }
   }
 )
 
