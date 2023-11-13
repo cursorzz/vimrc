@@ -6,7 +6,7 @@ vim.diagnostic.config(
   {
     virtual_text = false,
     signs = true,
-    float = {border = "single"}
+    float = { border = "single" }
   }
 )
 require("settings/options")
@@ -26,7 +26,7 @@ require("osc52").setup()
 
 require("gitsigns").setup()
 
-require("neodev").setup()
+-- require("neodev").setup()
 
 function ReloadConfig(package_name)
   for name, _ in pairs(package.loaded) do
@@ -74,9 +74,7 @@ require("tmux").setup(
   }
 )
 
-require("indent_blankline").setup {
-  char = "|",
-  buftype_exclude = {"terminal"}
+require("ibl").setup {
 }
 
 -- require("lualine").setup {
@@ -165,6 +163,11 @@ require("nvim_comment").setup(
 --   folders = 1,
 --   files = 1
 -- }
+-- }
+
+-- require("indent_blankline").setup {
+--  char = "|",
+--  buftype_exclude = { "terminal" }
 -- }
 
 -- local user_group = vim.api.nvim_create_augroup("User", {clear = false})

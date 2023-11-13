@@ -46,7 +46,7 @@ nnoremap <Leader>c :tabonly<CR>
 nnoremap <leader>S :lua require('spectre').open()<CR>
 
 nnoremap <Leader>v <cmd>lua require'zac.telescope'.search_dotfiles()<CR>
-nnoremap <Leader>l <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <Leader>l <cmd>lua vim.lsp.buf.format()<CR>
 " nnoremap <C-p> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>p <cmd>lua require'zac.telescope'.grep_find()<CR>
 " nnoremap f <cmd>lua require'hop'.hint_words()<CR>
@@ -63,6 +63,7 @@ tnoremap <Esc> <C-\><C-n>
 command! Gw :Gitsigns stage_buffer
 command! Gr :Gitsigns reset_buffer
 command! Gd :Gitsigns diffthis
+command! Format :lua vim.lsp.buf.format()
 " command! Gcommit Neogit<space>commit
 
 
@@ -154,7 +155,7 @@ let g:ctrlsf_default_root = 'project'
 map("n", "<Leader>s", "<Plug>CtrlSFCwordExec")
 
 map(
-  {"n", "v"},
+  { "n", "v" },
   "<Enter>",
   function()
     require("../zac/firework").expand()

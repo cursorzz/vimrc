@@ -21,7 +21,7 @@ vim.diagnostic.config(
   {
     virtual_text = false,
     signs = true,
-    float = {border = "single"}
+    float = { border = "single" }
   }
 )
 
@@ -32,7 +32,7 @@ local on_attach = function(client)
 end
 
 local function ensure_servers_installed()
-  local ensure_servers = {"gopls", "sumneko_lua", "solargraph", "volar", "cssls", "html", "emmet_ls"}
+  local ensure_servers = { "gopls", "sumneko_lua", "solargraph", "volar", "cssls", "html", "emmet_ls", "ruby_ls" }
   for _, f in pairs(ensure_servers) do
     local server_available, server = lsp_installer_servers.get_server(f)
     if server_available then
