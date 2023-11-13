@@ -49,7 +49,7 @@ set smartindent             " 智能对齐
 " set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 """""""""""
-" set clipboard+=unnamedplus  " 始终使用系统剪切板
+set clipboard+=unnamedplus  " 始终使用系统剪切板
 set wildmode=list:longest,full
 
 
