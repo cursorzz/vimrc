@@ -28,7 +28,21 @@ require("lazy").setup(
         "hrsh7th/cmp-nvim-lua"
       }
     },
-    "aserowy/tmux.nvim",
+    { "aserowy/tmux.nvim", opts = {
+      copy_sync = {
+        -- enables copy sync and overwrites all register actions to
+        -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+        enable = false
+      },
+      navigation = {
+        -- enables default keybindings (C-hjkl) for normal mode
+        enable_default_keybindings = true
+      },
+      resize = {
+        -- enables default keybindings (A-hjkl) for normal mode
+        enable_default_keybindings = true
+      }
+    } },
     {
       "akinsho/git-conflict.nvim",
       opts = {
@@ -92,9 +106,9 @@ require("lazy").setup(
     },
     {
       "nvim-treesitter/nvim-treesitter",
-      config = function()
-        -- vim.cmd([[TSUpdate]])
-      end
+      -- config = function()
+      -- vim.cmd([[TSUpdate]])
+      -- end
     },
     {
       "nvim-lua/telescope.nvim",
@@ -146,15 +160,15 @@ vim.diagnostic.config(
   }
 )
 
-require "nvim-treesitter.configs".setup {
-  -- textsubjects = {
-  --   enable = true,
-  --   keymaps = {
-  --     ["<cr>"] = "textsubjects-smart"
-  --   }
-  -- },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false
-  }
-}
+-- require "nvim-treesitter.configs".setup {
+--   -- textsubjects = {
+--   --   enable = true,
+--   --   keymaps = {
+--   --     ["<cr>"] = "textsubjects-smart"
+--   --   }
+--   -- },
+--   context_commentstring = {
+--     enable = true,
+--     enable_autocmd = false
+--   }
+-- }
