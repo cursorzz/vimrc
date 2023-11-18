@@ -1,6 +1,6 @@
 -- require('orgmode').setup_ts_grammar()
 require "nvim-treesitter.configs".setup {
-  ensure_installed = {"go", "lua", "ruby", "javascript", "vue", "html", "css", "vim"}, -- one of "all", "language", or a list of language
+  ensure_installed = {"go", "lua", "ruby", "javascript", "vue", "html", "css", "vim", "sql"}, -- one of "all", "language", or a list of language
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {"c", "rust"} -- list of language that will be disabled

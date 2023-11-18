@@ -82,7 +82,6 @@ require("lazy").setup(
       end,
       dependencies = { "nvim-tree/nvim-web-devicons" }
     },
-
     {
       "williamboman/mason.nvim",
       dependencies = {
@@ -105,8 +104,14 @@ require("lazy").setup(
         "nvim-telescope/telescope-file-browser.nvim"
       }
     },
-
-    { "github/copilot.vim" },
+    {
+      "zbirenbaum/copilot.lua",
+      event = "InsertEnter",
+      config = function()
+        require("copilot").setup({})
+        vim.cmd([[Copilot]])
+      end
+    },
     "tpope/vim-fugitive",
     {
       "stevearc/oil.nvim",
