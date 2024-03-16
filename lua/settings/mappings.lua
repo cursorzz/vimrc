@@ -168,4 +168,4 @@ map(
 -- map('n', '<leader>c', require('osc52').copy_operator, {expr = true})
 -- map('x', '<leader>c', require('osc52').copy_visual)
 -- autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif
-vim.keymap.set("n", "<leader>e", require("oil").open, {desc = "Open Oil directory"})
+vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open Oil directory" })

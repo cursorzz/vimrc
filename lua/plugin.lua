@@ -1,4 +1,5 @@
 require("settings/options")
+
 require("lazy").setup(
   {
     {
@@ -25,8 +26,13 @@ require("lazy").setup(
         "hrsh7th/vim-vsnip",
         "hrsh7th/vim-vsnip-integ",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lua"
+        "hrsh7th/cmp-nvim-lua",
       }
+    },
+    { "zbirenbaum/copilot-cmp",
+      config = function()
+        require("copilot_cmp").setup()
+      end
     },
     { "aserowy/tmux.nvim", opts = {
       copy_sync = {
@@ -93,6 +99,8 @@ require("lazy").setup(
             }
           }
         )
+        vim.keymap.set("n", "<leader>f", "<cmd>Lspsaga finder<CR>")
+        vim.keymap.set("n", "<leader>r", "<cmd>Lspsaga rename<CR>")
       end,
       dependencies = { "nvim-tree/nvim-web-devicons" }
     },
@@ -138,7 +146,15 @@ require("lazy").setup(
     {
       "lukas-reineke/indent-blankline.nvim",
       config = function()
-        require("ibl").setup()
+        local highlight = {
+          "CursorColumn",
+          "Whitespace",
+        }
+        require("ibl").setup({
+          scope = { enabled = false },
+          whitespace = { highlight = highlight, remove_blankline_trail = false },
+          indent = { highlight = highlight, char = "" }
+        })
       end
     }
   },

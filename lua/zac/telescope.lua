@@ -6,7 +6,7 @@ local uv = vim.loop
 -- print(vim.inspect(fb_actions))
 local M = {}
 local default_theme =
-  require("telescope.themes").get_dropdown(
+require("telescope.themes").get_dropdown(
   {
     mappings = {
       i = {
@@ -143,7 +143,7 @@ M.git_files = function()
         "--is-inside-work-tree"
       },
       cwd = uv.cwd(),
-      stdio = {nil, nil, nil}
+      stdio = { nil, nil, nil }
     },
     function(code, signal)
       if code == 0 then
@@ -156,8 +156,36 @@ M.git_files = function()
 end
 
 M.buffers = function()
-  require "telescope.builtin".buffers({previewer = false, show_all_buffers = true})
+  require "telescope.builtin".buffers({ previewer = false, show_all_buffers = true })
 end
+
+map(
+  "v",
+  "<C-l>",
+  function()
+    return M.grep_find()
+  end
+)
+
+map(
+  "n",
+  "<C-l>",
+  function()
+    return require("telescope.builtin").live_grep({
+      attach_mappings = function(buf, map)
+        map(
+          "i",
+          "<c-l>",
+          function()
+            actions.send_to_qflist(buf)
+            actions.open_qflist()
+          end
+        )
+        return true
+      end
+    })
+  end
+)
 
 map(
   "n",
