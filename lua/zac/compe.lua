@@ -34,7 +34,8 @@ cmp.setup(
           end
         }
       },
-      { name = "path" }
+      { name = "path" },
+      { name = "copilot", group_index = 2 },
     }
   }
 )

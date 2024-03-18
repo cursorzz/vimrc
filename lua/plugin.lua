@@ -1,5 +1,7 @@
 require("settings/options")
 
+
+
 require("lazy").setup(
   {
     {
@@ -32,6 +34,14 @@ require("lazy").setup(
     { "zbirenbaum/copilot-cmp",
       config = function()
         require("copilot_cmp").setup()
+      end
+    },
+    {
+      "zbirenbaum/copilot.lua",
+      event = "InsertEnter",
+      cmd = "Copilot",
+      config = function()
+        require("copilot").setup()
       end
     },
     { "aserowy/tmux.nvim", opts = {
@@ -126,14 +136,6 @@ require("lazy").setup(
         "nvim-telescope/telescope-file-browser.nvim"
       }
     },
-    {
-      "zbirenbaum/copilot.lua",
-      event = "InsertEnter",
-      config = function()
-        require("copilot").setup({})
-        vim.cmd([[Copilot]])
-      end
-    },
     "tpope/vim-fugitive",
     {
       "stevearc/oil.nvim",
@@ -175,6 +177,8 @@ vim.diagnostic.config(
     float = { border = "single" }
   }
 )
+
+
 
 -- require "nvim-treesitter.configs".setup {
 --   -- textsubjects = {
