@@ -17,7 +17,8 @@ require("lazy").setup(
       "nvim-lua/telescope.nvim"
     },
     { "nvim-tree/nvim-web-devicons", lazy = true },
-    { "ojroques/nvim-osc52" },
+    -- { "ojroques/nvim-osc52" },
+    { "ibhagwan/smartyank.nvim" },
     {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -163,7 +164,6 @@ require("lazy").setup(
   {}
 )
 
-require("osc52").setup()
 require("zac/telescope")
 require("zac/mason")
 require("zac/compe")

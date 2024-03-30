@@ -169,7 +169,7 @@ map(
 
 map(
   "n",
-  "<C-l>",
+  "<leader>-l",
   function()
     return require("telescope.builtin").live_grep({
       attach_mappings = function(buf, map)

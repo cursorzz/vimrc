@@ -21,6 +21,7 @@ local lua_fmt =
 local sources = {
   ls.builtins.formatting.prettierd.with({filetypes = {"javascript", "json", "html", "typescript", "vue"}}),
   lua_fmt,
+  ls.builtins.formatting.rubyfmt,
   ls.builtins.formatting.gofmt
 }
 
